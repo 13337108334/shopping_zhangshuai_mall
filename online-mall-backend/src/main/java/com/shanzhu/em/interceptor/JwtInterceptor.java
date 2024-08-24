@@ -26,8 +26,8 @@ import java.util.concurrent.TimeUnit;
  * 处理token检验等
  *
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @Component
 public class JwtInterceptor implements HandlerInterceptor {

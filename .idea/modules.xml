@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/online-mall-backend/OnlineMall-backend.iml" filepath="$PROJECT_DIR$/online-mall-backend/OnlineMall-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/sourcing_mall_github.iml" filepath="$PROJECT_DIR$/.idea/sourcing_mall_github.iml" />
+    </modules>
+  </component>
+</project>

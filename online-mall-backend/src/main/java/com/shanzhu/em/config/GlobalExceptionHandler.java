@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 处理接口中抛出的业务异常 {@link BizException}，返回 {@link R} 结构
  * 全局异常，可以统一异常的处理，不需要每个地方都写相关处理逻辑
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

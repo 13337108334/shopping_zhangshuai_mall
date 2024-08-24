@@ -3,8 +3,8 @@ package com.shanzhu.em.constants;
 /**
  * 系统状态码
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 public class Status {
 

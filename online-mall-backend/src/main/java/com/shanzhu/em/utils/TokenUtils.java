@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.User;
+
 import com.shanzhu.em.exception.BizException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

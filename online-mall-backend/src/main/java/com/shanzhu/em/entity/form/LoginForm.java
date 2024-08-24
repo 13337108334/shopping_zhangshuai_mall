@@ -5,8 +5,8 @@ import lombok.Data;
 /**
  * 用户登录表单
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @Data
 public class LoginForm {

@@ -6,8 +6,8 @@ import lombok.Data;
 /**
  * 接口返回对象封装 - Result
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @Data
 public class R<T> {

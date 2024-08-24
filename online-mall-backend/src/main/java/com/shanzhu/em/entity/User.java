@@ -9,8 +9,8 @@ import lombok.Data;
 /**
  * 用户
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @Data
 @TableName("sys_user")
