@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 /**
  * 异常类
+ *
+ * @author zhangshuai
+ * @Date 2024/08/24
  */
 @Component
 public class ExceptionHelper {

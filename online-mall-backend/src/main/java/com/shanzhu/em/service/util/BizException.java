@@ -3,8 +3,8 @@ package com.shanzhu.em.service.util;
 
 /**
  * 业务异常
- * 
- * @author viking.jinw
+ * @author zhangshuai
+ * @Date 2024/08/24
  */
 public class BizException extends RuntimeException {
 
@@ -13,16 +13,16 @@ public class BizException extends RuntimeException {
     /**
      * 错误码
      */
-    private String            errCode;
+    private String errCode;
     /**
      * 错误信息
      */
-    private String            errMsg;
+    private String errMsg;
 
     /**
      * @param errCode
      */
-    public BizException(String errCode){
+    public BizException(String errCode) {
         super(errCode);
         this.errCode = errCode;
     }
@@ -31,7 +31,7 @@ public class BizException extends RuntimeException {
      * @param errCode
      * @param errMsg
      */
-    public BizException(String errCode, String errMsg){
+    public BizException(String errCode, String errMsg) {
         super(errCode);
         this.errCode = errCode;
         this.errMsg = errMsg;
@@ -47,7 +47,7 @@ public class BizException extends RuntimeException {
      * @param errMsg
      * @param parent
      */
-    public BizException(String errCode, String errMsg, Throwable parent){
+    public BizException(String errCode, String errMsg, Throwable parent) {
         super(errCode, parent);
         this.errCode = errCode;
         this.errMsg = errMsg;
@@ -61,19 +61,19 @@ public class BizException extends RuntimeException {
         return errMsg;
     }
 
-    public BizException(ErrorCodeEnum errorCode, String errorMsg, Throwable cause){
+    public BizException(ErrorCodeEnum errorCode, String errorMsg, Throwable cause) {
         super(errorMsg, cause);
         this.errCode = errorCode.getErrorCode();
         this.errMsg = errorMsg;
     }
 
-    public BizException(ErrorCodeEnum errorCode, String errorMsg){
+    public BizException(ErrorCodeEnum errorCode, String errorMsg) {
         super(errorMsg);
         this.errCode = errorCode.getErrorCode();
         this.errMsg = errorMsg;
     }
 
-    public BizException(ErrorCodeEnum errorCode){
+    public BizException(ErrorCodeEnum errorCode) {
         super(errorCode.getErrorCode());
         this.errCode = errorCode.getErrorCode();
     }

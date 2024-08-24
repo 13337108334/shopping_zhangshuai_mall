@@ -1,6 +1,11 @@
 package com.shanzhu.em.service.util;
 
-
+/**
+ * 异常类
+ *
+ * @author zhangshuai
+ * @Date 2024/08/24
+ */
 public enum ErrorCodeEnum {
     /**
      * 订单明细中交付信息的日期早于当前系统时间
@@ -224,7 +229,7 @@ public enum ErrorCodeEnum {
      * 物料失效
      */
     MATERIAL_INVALID("material_invalid"),
-    
+
     /**
      * 赠品失效
      */
@@ -709,47 +714,47 @@ public enum ErrorCodeEnum {
      */
     TOO_MUCH_SETTLE("too_much_settle"),
     /**
-     *待结算金额为空
+     * 待结算金额为空
      */
     WAIT_SETTLE_AMOUNT_IS_NULL("wait_settle_amount_is_null"),
     /**
-     *数据所属人不同
+     * 数据所属人不同
      */
     DATA_OWNER_VALIDATE_FAILED("data_owner_validate_failed"),
     /**
-     *结算金额为空
+     * 结算金额为空
      */
     SETTLE_PRICE_IS_NULL("settle_price_is_null"),
     /**
-     *采购订单结算状态不正确
+     * 采购订单结算状态不正确
      */
     INVALID_PO_SETTLE_STATUS("invalid_po_settle_status"),
     /**
-     *收货单结算状态不正确
+     * 收货单结算状态不正确
      */
     INVALID_RECEIVE_SETTLE_STATUS("invalid_receive_settle_status"),
     /**
-     *结算数量为空
+     * 结算数量为空
      */
     SETTLE_QUANTITY_IS_NULL("settle_quantity_is_null"),
     /**
-     *结算含税价格为空
+     * 结算含税价格为空
      */
     SETTLE_TAX_PRICE_IS_NULL("settle_tax_price_is_null"),
     /**
-     *结算未税价格为空
+     * 结算未税价格为空
      */
     SETTLE_NOTAX_PRICE_IS_NULL("settle_notax_price_is_null"),
     /**
-     *本次结算金额过大
+     * 本次结算金额过大
      */
     SETTLE_PRICE_IS_TOO_LARGE("settle_price_is_too_large"),
     /**
-     *账期模式获取失败
+     * 账期模式获取失败
      */
     SETTLE_QUERY_RULE_FAILED("settle_query_rule_failed"),
     /**
-     *账期结算收货单id为空
+     * 账期结算收货单id为空
      */
     SETTLE_PERIOD_RECEIVE_ID_IS_NULL("settle_period_receive_id_is_null"),
     /**
@@ -765,47 +770,47 @@ public enum ErrorCodeEnum {
      */
     PAY_AMOUNT_IS_TOO_LARGE("pay_amount_is_too_large"),
     /**
-     *查询收货子单失败
+     * 查询收货子单失败
      */
     QUERY_RECEIVE_DETAIL_FAILED("query_receive_detail_failed"),
     /**
-     *收货子单对象为空
+     * 收货子单对象为空
      */
     RECEIVE_DETAIL_IS_NULL("receive_detail_is_null"),
     /**
-     *查询结算单失败
+     * 查询结算单失败
      */
     QUERY_PROCUREMENT_SETTLEMENT_FAILED("query_procurement_settlement_failed"),
     /**
-     *收货子单总金额为空
+     * 收货子单总金额为空
      */
     RECEIVE_ENTRY_TOTAL_AMOUNT_IS_NULL("receive_entry_total_amount_is_null"),
     /**
-     *结算单为空
+     * 结算单为空
      */
     SETTLEMENT_IS_NULL("settlement_is_null"),
     /**
-     *结算单不符合终止条件
+     * 结算单不符合终止条件
      */
     SETTLEMENT_CAN_NOT_TERMINATE("settlement_can_not_terminate"),
     /**
-     *结算单导出最大数量限制
+     * 结算单导出最大数量限制
      */
     SETTLEMENT_EXPORT_MAX_SIZE("settlement_export_max_size"),
     /**
-     *交易打款接口失败
+     * 交易打款接口失败
      */
     TRADE_DISBURSE_FAILED("trade_disburse_failed"),
     /**
-     *结算单列表为空
+     * 结算单列表为空
      */
     SETTLEMENT_ENTRYS_IS_EMPTY("settlement_entrys_is_empty"),
     /**
-     *结算单开票失败
+     * 结算单开票失败
      */
     SETTLEMENT_MAKE_INVOICE_FAILED("settlement_make_invoice_failed"),
     /**
-     *结算单收票失败
+     * 结算单收票失败
      */
     SETTLEMENT_RECEIVE_INVOICE_FAILED("settlement_receive_invoice_failed"),
     /**
@@ -829,8 +834,8 @@ public enum ErrorCodeEnum {
     /**
      * 账期信用额度释放失败
      */
-    PAYPERIOD_RELEASE_FAIL("payperiod_release_fail"), 
-    
+    PAYPERIOD_RELEASE_FAIL("payperiod_release_fail"),
+
     /**
      * 订单快照太旧
      */
@@ -839,39 +844,39 @@ public enum ErrorCodeEnum {
     /**
      * 订单版本错误
      */
-    ORDER_VERSION_ERROR("order_version_error"), 
-    
+    ORDER_VERSION_ERROR("order_version_error"),
+
     /**
      * 交易条款不能为空
      */
-    TRADE_TERM_LIST_NOT_NULL("trade_term_list_not_null"), 
-    
+    TRADE_TERM_LIST_NOT_NULL("trade_term_list_not_null"),
+
     /**
      * tradeTerm为空
      */
-    TRADE_TERM_IS_NULL("trade_term_is_null"), 
-    
+    TRADE_TERM_IS_NULL("trade_term_is_null"),
+
     /**
      * 查询tradeTerm失败
      */
-    QUERY_TRADE_TERM_FAILED("query_trade_term_failed"), 
-    
+    QUERY_TRADE_TERM_FAILED("query_trade_term_failed"),
+
     /**
      * 交易条款金额与订单金额不等
      */
-    TRADE_TERM_AMOUNT_NOT_EQ_TOTALCOST("trade_term_amount_not_eq_totalcost"), 
-    
+    TRADE_TERM_AMOUNT_NOT_EQ_TOTALCOST("trade_term_amount_not_eq_totalcost"),
+
     /**
      * 供应商不支持发票
      */
-    SUPPLIER_NOT_SUPPORT_INVOICE("supplier_not_support_invoice"), 
-    
-    
+    SUPPLIER_NOT_SUPPORT_INVOICE("supplier_not_support_invoice"),
+
+
     /**
      * 发票地址不是有效的
      */
-    INVOICE_ADDRESS_INVALID("invoice_address_invalid"), 
-    
+    INVOICE_ADDRESS_INVALID("invoice_address_invalid"),
+
     /**
      * 融易收未开通
      */
@@ -900,13 +905,13 @@ public enum ErrorCodeEnum {
     /**
      * 创建在线任务失败
      */
-    ONLIETASK_INIT_FAILED("onlinetask_init_failed"), 
-    
+    ONLIETASK_INIT_FAILED("onlinetask_init_failed"),
+
     /**
      * 采购订单不支持的交易类型
      */
-    NOT_SUPPORT_TRADE_TYPE("not_support_trade_type"), 
-    
+    NOT_SUPPORT_TRADE_TYPE("not_support_trade_type"),
+
     /**
      * 全表扫描
      */
@@ -918,7 +923,7 @@ public enum ErrorCodeEnum {
     /**
      * 当前引用
      */
-    AT_PRESENT_QUOTE ("at present_quote"),
+    AT_PRESENT_QUOTE("at present_quote"),
 
     /**
      * 已停用
@@ -1026,7 +1031,6 @@ public enum ErrorCodeEnum {
 
     /**
      * 电票批量操作超过最大限制
-     *
      */
     E_TICKET_MAX_BATCH_SIZE_ERROR("e_ticket_max_batch_size_error"),
 
@@ -1092,7 +1096,6 @@ public enum ErrorCodeEnum {
 
     /**
      * 电票批量操作超过最大限制
-     *
      */
     E_TICKET_PAY_AMOUNT_LIMIT_ERROR("e_ticket_pay_amount_limit_error"),
 
@@ -1265,7 +1268,7 @@ public enum ErrorCodeEnum {
      */
     MODIFY_OUTER_PROCUREMENT_ORDER_MATERIAL_PRICE_FAIL("modify_outer_procurement_order_material_price_fail"),
     /**
-     *  对公转账存在相同待付款金额的付款单
+     * 对公转账存在相同待付款金额的付款单
      */
     FUND_TRANSBYBANK_SAME_WAIT_PAY_AMOUNT("fund_transbybank_same_wait_pay_amount"),
     /**
@@ -1319,8 +1322,7 @@ public enum ErrorCodeEnum {
     /**
      * 未查询到订单行公式
      */
-    ORDER_ENTRY_PRICINGFORMULA_IS_NULL("order_entry_pricingFormula_is_null")
-    ;
+    ORDER_ENTRY_PRICINGFORMULA_IS_NULL("order_entry_pricingFormula_is_null");
 
 
     ErrorCodeEnum(String errorCode) {
