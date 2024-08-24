@@ -10,6 +10,7 @@
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/entity/vo/UserVo.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/CarouselService.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/entity/vo/GoodVo.java
+/Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/util/BizException.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/entity/form/LoginForm.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/controller/CartController.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/mapper/IconCategoryMapper.java
@@ -28,11 +29,14 @@
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/IncomeService.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/common/R.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/BackendApplication.java
+/Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/util/ErrorCodeEnum.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/entity/OrderGoods.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/mapper/IconMapper.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/controller/AddressController.java
+/Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/util/TechException.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/config/GlobalExceptionHandler.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/mapper/GoodMapper.java
+/Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/util/ThreadPoolUtils.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/mapper/FileMapper.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/controller/UserController.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/config/CorsConfig.java
@@ -71,3 +75,4 @@
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/controller/FileController.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/config/MybatisPlusConfig.java
 /Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/entity/Icon.java
+/Users/mac/Desktop/DM/shopping_zhangshuai_mall/online-mall-backend/src/main/java/com/shanzhu/em/service/util/ExceptionHelper.java
