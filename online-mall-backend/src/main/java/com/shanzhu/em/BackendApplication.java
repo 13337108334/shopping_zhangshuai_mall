@@ -23,6 +23,7 @@ public class BackendApplication {
         SpringApplication.run(BackendApplication.class, args);
 
         log.info("=====================项目后端启动成功============================");
+        log.info("=====================项目后端启动成功2222============================");
     }
 
 }
