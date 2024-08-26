@@ -12,8 +12,9 @@ import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.form.LoginForm;
 import com.shanzhu.em.entity.User;
 import com.shanzhu.em.entity.vo.UserVo;
-import com.shanzhu.em.exception.BizException;
 import com.shanzhu.em.mapper.UserMapper;
+import com.shanzhu.em.service.util.BizException;
+import com.shanzhu.em.service.util.ErrorCodeEnum;
 import com.shanzhu.em.utils.TokenUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +102,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
         //用户不存在
         if (user == null) {
-            throw new BizException(Status.CODE_403, "用户名或密码错误");
+            throw new BizException(ErrorCodeEnum.DELIVERY_SCHEDULE_STATUS_ERROR, "用户名或密码错误 请重新输入");
         }
 
         //生成token
