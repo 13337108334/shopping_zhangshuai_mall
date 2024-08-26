@@ -14,3 +14,4 @@ npm install
 
 # 启动项目
 npm run dev
+npm run dev
