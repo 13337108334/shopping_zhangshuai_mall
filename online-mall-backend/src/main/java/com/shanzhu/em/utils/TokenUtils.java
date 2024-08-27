@@ -5,7 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.User;
 
-import com.shanzhu.em.exception.BizException;
+import com.shanzhu.em.utils.BizException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;

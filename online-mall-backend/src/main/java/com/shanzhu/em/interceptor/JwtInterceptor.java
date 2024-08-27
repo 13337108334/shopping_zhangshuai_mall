@@ -7,7 +7,8 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.shanzhu.em.constants.RedisConstants;
 import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.User;
-import com.shanzhu.em.exception.BizException;
+
+import com.shanzhu.em.utils.BizException;
 import com.shanzhu.em.utils.UserHolder;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
