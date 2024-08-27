@@ -102,6 +102,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
         //用户不存在
         if (user == null) {
+            log.error("controller exception:{}","用户名或密码错误 请重新输入");
             throw new BizException(ErrorCodeEnum.DELIVERY_SCHEDULE_STATUS_ERROR, "用户名或密码错误 请重新输入");
         }
 
