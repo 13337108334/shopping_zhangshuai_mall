@@ -27,6 +27,10 @@
             <el-input v-model.trim="user.password" show-password aria-required="true"></el-input>
           </el-form-item>
 
+          <el-form-item label="登陆需要用左手点🫲" style="margin-top: 15px">
+            <el-input v-model.trim="user.password" show-password aria-required="true"></el-input>
+          </el-form-item>
+
           <el-form-item style="margin: 30px 80px">
             <el-button type="success" @click="onSubmit">登录</el-button>
             <el-button @click="$router.push('/register')">注册</el-button>
@@ -92,12 +96,12 @@ export default {
 .login-window-index {
   padding: 20px;
   width: 450px;
-  height: 280px;
-  background: #ffffff;
+  height: 480px;
+  background: #878787;
   position: absolute;
-  left: 50%;
+  left: 45%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(60%, -50%);
 }
 
 .title {
