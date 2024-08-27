@@ -49,7 +49,7 @@ export default {
       user: {},
       backgroundDiv: {
         backgroundImage:
-            "url(" + require("@/resource/img/login_back.png") + ")",
+            "url(" + require("@/resource/img/heiwukong.jpg") + ")",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
       },
