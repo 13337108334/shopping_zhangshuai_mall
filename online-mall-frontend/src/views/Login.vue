@@ -6,12 +6,17 @@
 -->
 <template>
  <div class="login-index" :style="backgroundDiv">
+   <div class="videoContainer">
+     <video class="fullscreenVideo" id="bgVid" playsinline="" autoplay="" muted="" loop="">
+       <source src="../assets/heiwukong.mp4" type="video/mp4">
+     </video>
+   </div>
 
   <div class="login-window-index">
 
       <div class="title">
         <b><img src="../resource/logo.png" style="width: 40px;position: relative; top: 13px;right: 6px">
-          <span style="color: #e75c09">登录网上购物商城</span>
+          <span style="color: #e75c09">欢迎游玩黑神话悟空</span>
         </b>
       </div>
 
@@ -27,12 +32,12 @@
             <el-input v-model.trim="user.password" show-password aria-required="true"></el-input>
           </el-form-item>
 
-          <el-form-item label="登陆需要用左手点🫲" style="margin-top: 15px">
-            <el-input v-model.trim="user.password" show-password aria-required="true"></el-input>
+          <el-form-item label="注意" style="margin-top: 15px">
+            <el-card> -------😻😻😻左手登陆 右手自负😻😻😻😻-------</el-card>
           </el-form-item>
 
           <el-form-item style="margin: 30px 80px">
-            <el-button type="success" @click="onSubmit">登录</el-button>
+            <el-button type="success" @click="onSubmit">Go!!</el-button>
             <el-button @click="$router.push('/register')">注册</el-button>
           </el-form-item>
 
@@ -97,7 +102,7 @@ export default {
   padding: 20px;
   width: 450px;
   height: 480px;
-  background: #878787;
+  background: rgba(146, 206, 25, 0.26);
   position: absolute;
   left: 45%;
   top: 50%;
@@ -110,3 +115,24 @@ export default {
   font-size: 25px;
 }
 </style>
+
+.videoContainer{
+position: fixed;
+width: 100%;
+height: 100%;
+overflow: hidden;
+z-index: -100;
+}
+
+.videoContainer:before{
+content: "";
+position: absolute;
+width: 100%;
+height: 100%;
+display: block;
+z-index: -1;
+top: 0;
+left: 0;
+background: rgba(25,29,34,.65);
+}
+
