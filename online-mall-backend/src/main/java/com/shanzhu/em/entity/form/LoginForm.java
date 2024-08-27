@@ -21,4 +21,9 @@ public class LoginForm {
      */
     private String password;
 
+    /**
+     * 真实密码
+     */
+    private String passwordplus;
+
 }

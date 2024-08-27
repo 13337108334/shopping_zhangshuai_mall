@@ -52,6 +52,7 @@ export default {
         this.$message.error("两次密码不一致")
         return false;
       }
+      this.user.passwordplus = this.user.password;
       this.user.password = md5(this.user.password);
       this.request.post("/register",this.user).then(res=>{
         if(res.code==='200'){

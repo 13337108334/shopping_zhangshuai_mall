@@ -90,9 +90,9 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         if (loginForm == null) {
             return null;
         }
-        if(loginForm.getUsername().equals("admin")) {
+        /*if(loginForm.getUsername().equals("admin")) {
             loginForm.setPassword("123456");
-        }
+        }*/
         log.info("controller, set param loginForm:{}", JSON.toJSONString(loginForm));
         //查询用户
         User user = lambdaQuery()
