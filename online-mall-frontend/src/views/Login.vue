@@ -102,7 +102,7 @@ export default {
   padding: 20px;
   width: 450px;
   height: 480px;
-  background: rgba(146, 206, 25, 0.26);
+  background: rgba(31, 33, 27, 0.26);
   position: absolute;
   left: 45%;
   top: 50%;
