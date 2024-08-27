@@ -1,4 +1,4 @@
-package com.shanzhu.em.service.util;
+package com.shanzhu.em.utils;
 
 /**
  * 异常类

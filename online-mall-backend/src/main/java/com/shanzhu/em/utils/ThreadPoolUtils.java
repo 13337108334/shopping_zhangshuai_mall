@@ -1,4 +1,4 @@
-package com.shanzhu.em.service.util;
+package com.shanzhu.em.utils;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.springframework.util.CollectionUtils;

@@ -1,4 +1,4 @@
-package com.shanzhu.em.service.util;
+package com.shanzhu.em.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
