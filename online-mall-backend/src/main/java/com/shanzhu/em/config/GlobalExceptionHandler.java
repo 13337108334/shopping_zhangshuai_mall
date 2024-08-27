@@ -3,7 +3,6 @@ package com.shanzhu.em.config;
 import com.shanzhu.em.common.R;
 
 import com.shanzhu.em.utils.BizException;
-
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
