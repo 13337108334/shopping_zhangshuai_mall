@@ -85,13 +85,12 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception e) throws Exception{
-        log.error("afterCompletion ThreadLocal removeUser -1 ");
         try {
             UserHolder.removeUser();
         } catch (Exception exception) {
-            log.error("afterCompletion ThreadLocal removeUser -2 exception:{}",
+            log.error("afterCompletion ThreadLocal removeUser exception:{}",
                    JSON.toJSONString(exception));
         }
-        log.error("afterCompletion ThreadLocal removeUser -3 ");
+        log.error("Controller----->拦截------>ModelAndView afterCompletion ThreadLocal removeUser 防止内存溢出");
     }
 }
