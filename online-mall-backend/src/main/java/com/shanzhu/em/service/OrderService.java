@@ -14,7 +14,7 @@ import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.entity.OrderGoods;
 import com.shanzhu.em.entity.OrderItem;
-import com.shanzhu.em.exception.BizException;
+import com.shanzhu.em.utils.BizException;
 import com.shanzhu.em.mapper.GoodMapper;
 import com.shanzhu.em.mapper.OrderGoodsMapper;
 import com.shanzhu.em.mapper.OrderMapper;

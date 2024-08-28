@@ -1,7 +1,7 @@
 <!--
  * 前台首页搜索栏
  *
- * @Author: ShanZhu
+ * @author: ZhangDaYe
  * @Date: 2023-11-11
 -->
 <template>

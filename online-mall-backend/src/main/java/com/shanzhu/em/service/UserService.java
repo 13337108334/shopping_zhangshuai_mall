@@ -2,6 +2,7 @@ package com.shanzhu.em.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,9 +12,12 @@ import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.form.LoginForm;
 import com.shanzhu.em.entity.User;
 import com.shanzhu.em.entity.vo.UserVo;
-import com.shanzhu.em.exception.BizException;
 import com.shanzhu.em.mapper.UserMapper;
+import com.shanzhu.em.utils.BizException;
+import com.shanzhu.em.utils.ErrorCodeEnum;
 import com.shanzhu.em.utils.TokenUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -24,10 +28,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 用户 服务层
- *
  */
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {
+
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
 
     @Resource
     RedisTemplate<String, User> redisTemplate;
@@ -81,6 +86,14 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      * @return 用户信息
      */
     public UserVo login(LoginForm loginForm) {
+        log.info("controller, param loginForm:{}", JSON.toJSONString(loginForm));
+        if (loginForm == null) {
+            return null;
+        }
+        /*if(loginForm.getUsername().equals("admin")) {
+            loginForm.setPassword("123456");
+        }*/
+        log.info("controller, set param loginForm:{}", JSON.toJSONString(loginForm));
         //查询用户
         User user = lambdaQuery()
                 .eq(User::getUsername, loginForm.getUsername())
@@ -89,7 +102,8 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
         //用户不存在
         if (user == null) {
-            throw new BizException(Status.CODE_403, "用户名或密码错误");
+            log.error("controller exception:{}","用户名或密码错误 请重新输入");
+            throw new BizException(ErrorCodeEnum.DELIVERY_SCHEDULE_STATUS_ERROR, "用户名或密码错误 请重新输入");
         }
 
         //生成token

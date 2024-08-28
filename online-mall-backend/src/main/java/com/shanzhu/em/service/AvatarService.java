@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shanzhu.em.constants.FileConstants;
 import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.Avatar;
-import com.shanzhu.em.exception.BizException;
+import com.shanzhu.em.utils.BizException;
 import com.shanzhu.em.mapper.AvatarMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

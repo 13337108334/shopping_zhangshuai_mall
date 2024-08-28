@@ -4,7 +4,6 @@ import com.shanzhu.em.entity.User;
 
 /**
  * 用户信息
-
  */
 public class UserHolder {
 

@@ -15,7 +15,7 @@ import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.Good;
 import com.shanzhu.em.entity.GoodStandard;
 import com.shanzhu.em.entity.vo.GoodVo;
-import com.shanzhu.em.exception.BizException;
+import com.shanzhu.em.utils.BizException;
 import com.shanzhu.em.mapper.GoodMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

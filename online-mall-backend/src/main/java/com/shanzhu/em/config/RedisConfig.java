@@ -12,8 +12,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  *
  * 什么是redis? (https://worktile.com/kb/ask/8838.html)
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @Configuration
 public class RedisConfig {

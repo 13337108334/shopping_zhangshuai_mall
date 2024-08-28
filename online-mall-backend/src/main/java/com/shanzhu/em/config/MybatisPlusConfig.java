@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
  *
  * 什么是MybatisPlus? （https://blog.csdn.net/qq_52922453/article/details/127196313）
  *
- * @author: ShanZhu
- * @date: 2023-11-10
+ * @author: ZhangDaYe
+ * @date: 2024-08-24
  */
 @Configuration
 public class MybatisPlusConfig {

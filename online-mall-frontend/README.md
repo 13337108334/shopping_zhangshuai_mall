@@ -1,7 +1,7 @@
 <!--
  * 启动说明
  *
- * @Author: ShanZhu
+ * @author: ZhangDaYe
  * @Date: 2023-11-11
 -->
 ### 启动项目
@@ -13,4 +13,5 @@ npm config set registry https://registry.npm.taobao.org
 npm install
 
 # 启动项目
+npm run dev
 npm run dev

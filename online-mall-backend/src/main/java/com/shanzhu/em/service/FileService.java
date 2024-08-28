@@ -11,8 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shanzhu.em.constants.FileConstants;
 import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.SysFile;
-import com.shanzhu.em.exception.BizException;
+
 import com.shanzhu.em.mapper.FileMapper;
+import com.shanzhu.em.utils.BizException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

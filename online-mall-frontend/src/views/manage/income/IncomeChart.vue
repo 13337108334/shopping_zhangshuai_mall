@@ -1,7 +1,7 @@
 <!--
  * 销售统计图-如、图表
  *
- * @Author: ShanZhu
+ * @author: ZhangDaYe
  * @Date: 2023-11-11
 -->
 <template>

@@ -2,6 +2,7 @@ package com.shanzhu.em.controller;
 
 
 import cn.hutool.core.util.BooleanUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.shanzhu.em.common.R;
 import com.shanzhu.em.constants.Status;
@@ -11,6 +12,8 @@ import com.shanzhu.em.entity.vo.UserVo;
 import com.shanzhu.em.service.UserService;
 import com.shanzhu.em.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +28,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
 
@@ -67,6 +72,7 @@ public class UserController {
      */
     @PostMapping("/login")
     public R<UserVo> login(@RequestBody LoginForm loginForm) {
+        log.info("controller, param loginForm:{}", JSON.toJSONString(loginForm));
         return R.success(userService.login(loginForm));
     }
 
