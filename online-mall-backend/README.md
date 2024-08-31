@@ -9,7 +9,7 @@ java 1.8
 前端vue+js，后端jdk1.8+springBoot+mybaties+mysql
 
 一、所需环境
-1、maven 3.3.3以上
+1、maven 3.3.3以上 需要手动配置settings.xml文件为阿里云镜像  标签别改错！标签别改错！标签别改错！
 2、redis 2.0以上
 3、git
 4、mysql 5.7以上  root  123456 （默认密码root需要改为123456）
@@ -44,7 +44,17 @@ yml: jdbc:mysql://localhost:3306/DB_OnlineMall?serverTimezone=GMT%2b8&useSSL=fal
 
 <img width="1397" alt="image" src="https://github.com/user-attachments/assets/c6e69534-e77e-4161-92ca-169b550ce2ef">
 
+<img width="1383" alt="image" src="https://github.com/user-attachments/assets/14796af4-c95f-48b3-b205-e463e09ecd64">
 
+<img width="1396" alt="image" src="https://github.com/user-attachments/assets/92774162-cb4e-4041-9ebd-842542ebca0c">
+
+
+
+三、git命令
+ git pull 拉取代码
+ git add . 加入缓存
+ git commit -m "提交备注"
+ git push 提交
 
 
 
