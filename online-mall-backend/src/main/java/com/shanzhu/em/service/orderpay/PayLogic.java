@@ -7,6 +7,7 @@ import com.shanzhu.em.utils.SourceBizTypeEnum;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class PayLogic implements InitializingBean {
     Map<String, PayService> serviceMap = Maps.newHashMap();
 
     // todo 此处封装好 其他地方注入logic类直接调用
-    ResultData<Order> logic(SourceBizTypeEnum sourceBizTypeEnum,Long id){
+    ResultData<Order> logic(SourceBizTypeEnum sourceBizTypeEnum, Long id) {
         PayService payService = serviceMap.get(sourceBizTypeEnum.getValue());
         return payService.buildParam(id);
     }
@@ -30,7 +31,7 @@ public class PayLogic implements InitializingBean {
         payService.forEach(
                 e -> {
                     String sourceBizValue = e.getSourceBizType().getValue();
-                    serviceMap.put(sourceBizValue,e);
+                    serviceMap.put(sourceBizValue, e);
                 }
         );
     }
