@@ -1,4 +1,4 @@
-package com.shanzhu.em.service;
+package com.shanzhu.em.service.orderpay;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
@@ -14,6 +14,7 @@ import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.entity.OrderGoods;
 import com.shanzhu.em.entity.OrderItem;
+import com.shanzhu.em.service.CartService;
 import com.shanzhu.em.utils.BizException;
 import com.shanzhu.em.mapper.GoodMapper;
 import com.shanzhu.em.mapper.OrderGoodsMapper;
@@ -186,4 +187,8 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         return orderMapper.receiveOrder(orderNo);
     }
 
+    // todo 本APP通用订单查询待开发
+    public Order getOrder(Long id){
+        return null;
+    }
 }
