@@ -33,6 +33,6 @@ public class OtherPayServiceImpl extends AbstractPayService {
 
     @Override
     public SourceBizTypeEnum getSourceBizType() {
-        return null;
+        return SourceBizTypeEnum.OTHERPAY;
     }
 }

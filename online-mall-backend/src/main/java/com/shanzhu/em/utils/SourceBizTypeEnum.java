@@ -15,17 +15,17 @@ public enum SourceBizTypeEnum {
     /**
      * 支付宝
      */
-    ALIPAY("purchase", "询价单", 1L, "00000008"),
+    ALIPAY("alipay", "支付宝", 1L, "00000008"),
 
     /**
      * 微信
      */
-    WECHATPAY("purchase", "询价单", 1L, "00000088"),
+    WECHATPAY("wechatpay", "微信", 1L, "00000088"),
 
     /**
      * 其他支付
      */
-    OTHERPAY("purchase", "询价单", 1L, "00000888"),
+    OTHERPAY("otherpay", "其他", 1L, "00000888"),
 
     /**
      * 询价
