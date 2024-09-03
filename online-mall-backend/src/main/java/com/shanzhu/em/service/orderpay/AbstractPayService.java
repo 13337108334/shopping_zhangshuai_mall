@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * 策略模式-抽象层
+ *
  * @author zhangshuai
  * @Date 2024/09/03
  */
@@ -28,9 +29,10 @@ public abstract class AbstractPayService implements PayService {
         try {
             Order order = orderService.getOrder(id);
             if (order == null) {
-                logger.error("AbstractPayService getOrder order is null 订单id为:{},sourceBizTypeEnum:{}", JSON.toJSONString(id),JSON.toJSONString(sourceBizTypeEnum));
+                logger.error("AbstractPayService getOrder order is null 订单id为:{},sourceBizTypeEnum:{}", JSON.toJSONString(id), JSON.toJSONString(sourceBizTypeEnum));
                 return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
             }
+            // 植入来源类型在model的goods字段，方便通过返回值看来源类型
             order.setGoods(sourceBizTypeEnum.getValue());
             ResultData<Order> resultData = ResultData.genSuccess(order);
             logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()), JSON.toJSONString(resultData));

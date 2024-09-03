@@ -27,7 +27,7 @@ public class OtherPayServiceImpl extends AbstractPayService {
         }
         if (id == null) {
             logger.error("OtherPayServiceImpl buildParam id is null");
-            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getErrorMessage());
+            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getErrorMessage());
         }
         logger.info("OtherPayServiceImpl buildParam sourceBizTypeEnum.value:{}, id:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()), JSON.toJSONString(id));
         //todo 其他订单业务逻辑

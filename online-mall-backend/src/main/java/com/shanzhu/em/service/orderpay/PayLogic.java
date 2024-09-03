@@ -39,7 +39,7 @@ public class PayLogic implements InitializingBean {
         }
         if (id == null) {
             log.error("PayLogic logic id is null");
-            return ResultData.genError(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getErrorMessage());
+            return ResultData.genError(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getErrorMessage());
         }
         PayService payService = serviceMap.get(sourceBizTypeEnum.getValue());
         log.info("PayLogic logic payService:{}", JSON.toJSONString(payService));

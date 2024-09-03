@@ -48,7 +48,7 @@ public enum ErrorCodeAndMessage {
 
     /** ----------- 接口参数校验异常 ---------------------------- */
 
-    MMP_CHECK_INPUT_ID(11, "传入的参数不是ID"),
+    MMP_CHECK_INPUT_ID_NULL(11, "传入的ID为null"),
 
     MMP_CHECK_INPUT_NULL(12, "传入的参数为空"),
 
