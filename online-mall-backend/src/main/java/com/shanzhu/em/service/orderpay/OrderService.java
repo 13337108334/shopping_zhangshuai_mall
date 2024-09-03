@@ -33,8 +33,6 @@ import java.util.Map;
 
 /**
  * 订单 服务层
- *
-
  */
 @Service
 @RequiredArgsConstructor
@@ -191,8 +189,8 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         return orderMapper.receiveOrder(orderNo);
     }
 
-    public Order getOrder(Long id){
-        if(id == null ){
+    public Order getOrder(Long id) {
+        if (id == null) {
             logger.error("OrderService getOrder logic过来的 id is null");
             return null;
         }

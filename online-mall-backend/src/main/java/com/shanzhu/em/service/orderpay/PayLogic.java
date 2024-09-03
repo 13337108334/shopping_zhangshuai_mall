@@ -26,17 +26,17 @@ public class PayLogic implements InitializingBean {
 
     //此处封装好 其他地方注入logic类直接调用
     public ResultData<Order> logic(SourceBizTypeEnum sourceBizTypeEnum, Long id) {
-        if(sourceBizTypeEnum == null){
+        if (sourceBizTypeEnum == null) {
             log.error("PayLogic logic sourceBizTypeEnum is null");
             return null;
         }
-        if(id == null){
+        if (id == null) {
             log.error("PayLogic logic id is null");
             return null;
         }
         PayService payService = serviceMap.get(sourceBizTypeEnum.getValue());
         log.info("PayLogic logic payService:{}", JSON.toJSONString(payService));
-        return payService.buildParam(sourceBizTypeEnum,id);
+        return payService.buildParam(sourceBizTypeEnum, id);
     }
 
     @Override

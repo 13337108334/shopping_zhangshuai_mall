@@ -19,20 +19,20 @@ public abstract class AbstractPayService implements PayService {
     @Autowired
     OrderService orderService;
 
-    protected ResultData<Order> getOrder(SourceBizTypeEnum sourceBizTypeEnum,Long id) {
+    protected ResultData<Order> getOrder(SourceBizTypeEnum sourceBizTypeEnum, Long id) {
         try {
             Order order = orderService.getOrder(id);
-            if(order == null){
+            if (order == null) {
                 logger.error("AbstractPayService getOrder order is null 订单id为:{}", JSON.toJSONString(id));
-                return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(),ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
+                return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
             }
             order.setGoods(sourceBizTypeEnum.getValue());
             ResultData<Order> resultData = ResultData.genSuccess(order);
-            logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()),JSON.toJSONString(resultData));
+            logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()), JSON.toJSONString(resultData));
             return resultData;
         } catch (Exception e) {
             logger.error("AbstractPayService getOrder error,id:{},e:{}", id, e);
-            return ResultData.genException(ErrorCodeAndMessage.THROW_DB_EXCEPTION.getStringErrorCode(),ErrorCodeAndMessage.THROW_DB_EXCEPTION.getErrorMessage());
+            return ResultData.genException(ErrorCodeAndMessage.THROW_DB_EXCEPTION.getStringErrorCode(), ErrorCodeAndMessage.THROW_DB_EXCEPTION.getErrorMessage());
         }
     }
 }
