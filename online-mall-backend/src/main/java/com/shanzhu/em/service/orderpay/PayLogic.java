@@ -16,6 +16,7 @@ import java.util.Map;
 
 
 /**
+ * 策略模式开放接口
  * @author zhangshuai
  * @Date 2024/09/03
  */

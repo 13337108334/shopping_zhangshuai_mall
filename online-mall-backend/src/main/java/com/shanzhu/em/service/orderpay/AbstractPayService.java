@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * 策略模式-抽象层
  * @author zhangshuai
  * @Date 2024/09/03
  */
