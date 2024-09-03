@@ -11,6 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author zhangshuai
+ * @Date 2024/09/03
+ */
 @Component
 public abstract class AbstractPayService implements PayService {
 

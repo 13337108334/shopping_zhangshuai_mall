@@ -8,6 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author zhangshuai
+ * @Date 2024/09/03
+ */
 @Component
 public class WechatServiceImpl extends AbstractPayService {
     private static final Logger logger = LoggerFactory.getLogger(WechatServiceImpl.class);
