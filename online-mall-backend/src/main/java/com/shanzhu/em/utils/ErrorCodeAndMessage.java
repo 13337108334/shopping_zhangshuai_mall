@@ -21,6 +21,11 @@ public enum ErrorCodeAndMessage {
      */
     SOURCE_LIST_IS_NULL(10010, "来源集合为空"),
 
+    /**
+     * 查询数据库异常
+     */
+    THROW_DB_EXCEPTION(99999, "查询数据库异常 请查看服务器日志排查原因"),
+
 
     /**
      * 系统未知异常

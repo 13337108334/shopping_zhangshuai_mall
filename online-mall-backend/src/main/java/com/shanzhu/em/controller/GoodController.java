@@ -86,7 +86,7 @@ public class GoodController {
         // 打乱集合顺序 枚举随机从集合取第一个值作为一个随机来源类型向下传递
         Collections.shuffle(sourceBizTypeEnumList);
         SourceBizTypeEnum sourceBizTypeEnum = sourceBizTypeEnumList.get(0);
-        log.error("TestController logicController sourceBizTypeEnum:{}", JSON.toJSONString(sourceBizTypeEnum));
+        log.info("TestController logicController sourceBizTypeEnum:{}", JSON.toJSONString(sourceBizTypeEnum));
         if (sourceBizTypeEnum == null) {
             ResultData<Order> resultData = ResultData.genError(ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getErrorMessage());
             log.error("TestController logicController sourceBizTypeEnum来源类型随机取到了null 程序返回结果为 result：{}",JSON.toJSONString(resultData));

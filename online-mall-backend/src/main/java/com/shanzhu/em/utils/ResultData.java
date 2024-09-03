@@ -59,6 +59,13 @@ public class ResultData<T> implements Serializable {
 		result.setMessage(errorMessage);
 		return result;
 	}
+	public static <T> ResultData<T> genException(String errorCode,String errorMessage) {
+			ResultData<T> result = new ResultData<>();
+			result.setSuccess(false);
+			result.setResultCode(errorCode);
+			result.setMessage(errorMessage);
+			return result;
+		}
 
 	@Override
 	public String toString() {

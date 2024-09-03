@@ -32,7 +32,7 @@ public abstract class AbstractPayService implements PayService {
             return resultData;
         } catch (Exception e) {
             logger.error("AbstractPayService getOrder error,id:{},e:{}", id, e);
-            return null;
+            return ResultData.genException(ErrorCodeAndMessage.THROW_DB_EXCEPTION.getStringErrorCode(),ErrorCodeAndMessage.THROW_DB_EXCEPTION.getErrorMessage());
         }
     }
 }
