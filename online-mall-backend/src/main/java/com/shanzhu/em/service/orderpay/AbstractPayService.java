@@ -28,7 +28,7 @@ public abstract class AbstractPayService implements PayService {
         try {
             Order order = orderService.getOrder(id);
             if (order == null) {
-                logger.error("AbstractPayService getOrder order is null 订单id为:{}", JSON.toJSONString(id));
+                logger.error("AbstractPayService getOrder order is null 订单id为:{},sourceBizTypeEnum:{}", JSON.toJSONString(id),JSON.toJSONString(sourceBizTypeEnum));
                 return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
             }
             order.setGoods(sourceBizTypeEnum.getValue());

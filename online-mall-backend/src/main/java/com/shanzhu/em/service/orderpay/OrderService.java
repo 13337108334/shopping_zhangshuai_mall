@@ -20,6 +20,7 @@ import com.shanzhu.em.mapper.GoodMapper;
 import com.shanzhu.em.mapper.OrderGoodsMapper;
 import com.shanzhu.em.mapper.OrderMapper;
 import com.shanzhu.em.mapper.StandardMapper;
+import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -34,6 +35,7 @@ import java.util.Map;
 
 /**
  * 订单 服务层
+ *
  * @author zhangshuai
  * @Date 2024/09/03
  */
@@ -195,9 +197,12 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
     public Order getOrder(Long id) {
         if (id == null) {
             logger.error("OrderService getOrder logic过来的 id is null");
-            return null;
+            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getErrorMessage());
         }
         Order order = orderMapper.selectById(id);
+        if (order == null) {
+            throw new BizException(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
+        }
         return order;
     }
 }

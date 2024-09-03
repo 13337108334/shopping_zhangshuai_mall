@@ -37,7 +37,7 @@ public class GoodController {
 
     private static final Logger log = LoggerFactory.getLogger(GoodController.class);
 
-    public static final Long ORDER_LONG_ID = 15L;
+    public static final Long ORDER_LONG_ID = 9999L;
 
     @Autowired
     private final PayLogic payLogic;

@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.5.1/mybatis-plus-core-3.5.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/mybatis-plus-core-3.5.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

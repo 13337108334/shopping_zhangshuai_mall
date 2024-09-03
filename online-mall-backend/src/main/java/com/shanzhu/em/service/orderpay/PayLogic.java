@@ -3,6 +3,7 @@ package com.shanzhu.em.service.orderpay;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.shanzhu.em.entity.Order;
+import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.ResultData;
 import com.shanzhu.em.utils.SourceBizTypeEnum;
 import org.slf4j.Logger;
@@ -34,11 +35,11 @@ public class PayLogic implements InitializingBean {
     public ResultData<Order> logic(SourceBizTypeEnum sourceBizTypeEnum, Long id) {
         if (sourceBizTypeEnum == null) {
             log.error("PayLogic logic sourceBizTypeEnum is null");
-            return null;
+            return ResultData.genError(ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getErrorMessage());
         }
         if (id == null) {
             log.error("PayLogic logic id is null");
-            return null;
+            return ResultData.genError(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getErrorMessage());
         }
         PayService payService = serviceMap.get(sourceBizTypeEnum.getValue());
         log.info("PayLogic logic payService:{}", JSON.toJSONString(payService));
