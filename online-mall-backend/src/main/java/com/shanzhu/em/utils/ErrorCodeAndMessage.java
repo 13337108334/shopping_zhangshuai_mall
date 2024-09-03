@@ -12,7 +12,7 @@ public enum ErrorCodeAndMessage {
     ORDER_IS_NULL(10008, "查询订单结果为空,请检查订单表是否存在该id对应的订单"),
 
     /**
-     * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum)
+     * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum，如新增实现需要在该枚举类下新增类型 并在orderpay/impl包下新增实现)
      */
     SOURCE_BIZTYPE_ENUMLIST_IS_NULL(10009, "来源类型为空"),
 
