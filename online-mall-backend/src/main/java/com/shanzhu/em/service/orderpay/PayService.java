@@ -5,6 +5,7 @@ import com.shanzhu.em.utils.ResultData;
 import com.shanzhu.em.utils.SourceBizTypeEnum;
 
 /**
+ * 支付接口
  * @author zhangshuai
  * @Date 2024/09/03
  */
