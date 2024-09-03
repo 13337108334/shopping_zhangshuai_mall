@@ -58,7 +58,7 @@ public class GoodController {
     }
 
     /**
-     * 注意！！！： 测试前将 该类定义的公用参数 ORDER_LONG_ID 第42行代码 改为你数据库 t_order表的id 再进行测试
+     * 注意！！！： 测试前将 该类定义的公用参数 ORDER_LONG_ID 第40行代码 改为你数据库 t_order表的id 再进行测试
      * 访问地址：http://localhost:8888/api/good/logic
      * 测试支付宝、微信、其他，这三种支付方式走策略模式代码
      *
