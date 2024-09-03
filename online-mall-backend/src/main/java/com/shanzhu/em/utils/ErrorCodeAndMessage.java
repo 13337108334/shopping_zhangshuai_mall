@@ -7,6 +7,22 @@ package com.shanzhu.em.utils;
  */
 public enum ErrorCodeAndMessage {
     /**
+     * 查询订单结果为空
+     */
+    ORDER_IS_NULL(10008, "查询订单结果为空,请检查订单表是否存在该id对应的订单"),
+
+    /**
+     * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum)
+     */
+    SOURCE_BIZTYPE_ENUMLIST_IS_NULL(10009, "来源类型为空"),
+
+    /**
+     * list集合为空
+     */
+    SOURCE_LIST_IS_NULL(10010, "来源集合为空"),
+
+
+    /**
      * 系统未知异常
      */
     SYSTEM_UNKNOW_ERROR(1, "系统未知异常"),

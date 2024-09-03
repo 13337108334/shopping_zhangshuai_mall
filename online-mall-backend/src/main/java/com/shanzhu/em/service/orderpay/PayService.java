@@ -6,7 +6,7 @@ import com.shanzhu.em.utils.SourceBizTypeEnum;
 
 public interface PayService {
 
-    ResultData<Order> buildParam(Long id);
+    ResultData<Order> buildParam(SourceBizTypeEnum sourceBizTypeEnum,Long id);
 
     SourceBizTypeEnum getSourceBizType();
 

@@ -16,19 +16,18 @@ public class OtherPayServiceImpl extends AbstractPayService {
     private static final Logger logger = LoggerFactory.getLogger(OtherPayServiceImpl.class);
 
     @Override
-    public ResultData<Order> buildParam(Long id) {
-        logger.info("OtherPayServiceImpl buildParam id:{}", JSON.toJSONString(id));
+    public ResultData<Order> buildParam(SourceBizTypeEnum sourceBizTypeEnum,Long id) {
+        if (sourceBizTypeEnum == null) {
+            logger.error("OtherPayServiceImpl buildParam sourceBizTypeEnum is null");
+            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(),ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
+        }
         if (id == null) {
             logger.error("OtherPayServiceImpl buildParam id is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getStringErrorCode(),ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getErrorMessage());
         }
-        ResultData<Order> order = getOrder(id);
-        if (order == null || !order.isSuccess() ) {
-            logger.error("OtherPayServiceImpl buildParam order is null");
-            throw new BizException(ErrorCodeAndMessage.REMOTE_RESULT_NULL.getStringErrorCode(),ErrorCodeAndMessage.REMOTE_RESULT_NULL.getErrorMessage());
-        }
+        logger.info("OtherPayServiceImpl buildParam sourceBizTypeEnum.value:{}, id:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()),JSON.toJSONString(id));
         //todo 其他订单业务逻辑
-        return order;
+        return getOrder(sourceBizTypeEnum,id);
     }
 
     @Override

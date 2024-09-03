@@ -12,7 +12,7 @@
         <result property="img" column="imgs"></result>
     </resultMap>
 
-    <select id="selectByUserId" parameterType="int" resultType="java.util.HashMap">
+    <select id="selectByUserId" parameterType="int" resultType="java.util.Map">
         SELECT o.*, og.good_id,good.`name` as good_name, og.count, og.standard, good.imgs
         FROM t_order o, order_goods og ,good
         WHERE o.id = og.order_id AND o.user_id = #{userId} AND og.good_id = good.id

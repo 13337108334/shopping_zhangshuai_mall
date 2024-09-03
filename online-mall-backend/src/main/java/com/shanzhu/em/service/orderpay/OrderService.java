@@ -22,6 +22,8 @@ import com.shanzhu.em.mapper.OrderMapper;
 import com.shanzhu.em.mapper.StandardMapper;
 import com.shanzhu.em.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,8 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class OrderService extends ServiceImpl<OrderMapper, Order> {
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderMapper orderMapper;
 
@@ -187,8 +191,12 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         return orderMapper.receiveOrder(orderNo);
     }
 
-    // todo 本APP通用订单查询待开发
     public Order getOrder(Long id){
-        return null;
+        if(id == null ){
+            logger.error("OrderService getOrder logic过来的 id is null");
+            return null;
+        }
+        Order order = orderMapper.selectById(id);
+        return order;
     }
 }

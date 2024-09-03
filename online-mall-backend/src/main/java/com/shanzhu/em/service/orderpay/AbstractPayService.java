@@ -1,8 +1,11 @@
 package com.shanzhu.em.service.orderpay;
 
+import com.alibaba.fastjson.JSON;
 import com.shanzhu.em.entity.Order;
+import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.ErrorCodeEnum;
 import com.shanzhu.em.utils.ResultData;
+import com.shanzhu.em.utils.SourceBizTypeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +19,16 @@ public abstract class AbstractPayService implements PayService {
     @Autowired
     OrderService orderService;
 
-    protected ResultData<Order> getOrder(Long id) {
+    protected ResultData<Order> getOrder(SourceBizTypeEnum sourceBizTypeEnum,Long id) {
         try {
             Order order = orderService.getOrder(id);
-            ResultData<Order> resultData = new ResultData<>();
-            if (order != null) {
-                resultData.setSuccess(true);
-                resultData.setData(order);
-            } else {
-                resultData.setData(null);
-                resultData.setSuccess(false);
-                resultData.setMessage("订单还未付款");
-                resultData.setResultCode(ErrorCodeEnum.ORDER_WAIT_PAY.getErrorCode());
+            if(order == null){
+                logger.error("AbstractPayService getOrder order is null 订单id为:{}", JSON.toJSONString(id));
+                return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(),ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
             }
+            order.setGoods(sourceBizTypeEnum.getValue());
+            ResultData<Order> resultData = ResultData.genSuccess(order);
+            logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()),JSON.toJSONString(resultData));
             return resultData;
         } catch (Exception e) {
             logger.error("AbstractPayService getOrder error,id:{},e:{}", id, e);

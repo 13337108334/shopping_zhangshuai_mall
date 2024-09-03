@@ -1,5 +1,6 @@
 package com.shanzhu.em.utils;
 
+
 import java.io.Serializable;
 
 public class ResultData<T> implements Serializable {
@@ -42,6 +43,21 @@ public class ResultData<T> implements Serializable {
 
 	public void setSuccess(boolean success) {
 		this.success = success;
+	}
+
+	public static <T> ResultData<T> genSuccess(T data) {
+		ResultData<T> result = new ResultData<>();
+		result.setSuccess(true);
+		result.setData(data);
+		return result;
+	}
+
+	public static <T> ResultData<T> genError(String errorCode,String errorMessage) {
+		ResultData<T> result = new ResultData<>();
+		result.setSuccess(false);
+		result.setResultCode(errorCode);
+		result.setMessage(errorMessage);
+		return result;
 	}
 
 	@Override

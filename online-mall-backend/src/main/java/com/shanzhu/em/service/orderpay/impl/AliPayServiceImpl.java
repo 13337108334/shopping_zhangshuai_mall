@@ -17,19 +17,18 @@ public class AliPayServiceImpl extends AbstractPayService {
 
 
     @Override
-    public ResultData<Order> buildParam(Long id) {
-        logger.info("AliPayServiceImpl buildParam id:{}", JSON.toJSONString(id));
+    public ResultData<Order> buildParam(SourceBizTypeEnum sourceBizTypeEnum,Long id) {
+        if (sourceBizTypeEnum == null) {
+            logger.error("AliPayServiceImpl buildParam sourceBizTypeEnum is null");
+            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(),ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
+        }
         if (id == null) {
             logger.error("AliPayServiceImpl buildParam id is null");
-            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getStringErrorCode(),ErrorCodeAndMessage.MMP_CHECK_INPUT_ID.getErrorMessage());
+            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(),ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
         }
-        ResultData<Order> resultData = getOrder(id);
-        if (resultData == null || resultData.getData() == null || !resultData.isSuccess() ) {
-            logger.error("AliPayServiceImpl buildParam order is null");
-            throw new BizException(ErrorCodeAndMessage.REMOTE_RESULT_NULL.getStringErrorCode(),ErrorCodeAndMessage.REMOTE_RESULT_NULL.getErrorMessage());
-        }
+        logger.info("AliPayServiceImpl buildParam sourceBizTypeEnum.value:{}, id:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()),JSON.toJSONString(id));
         //todo 阿里订单业务逻辑
-        return resultData;
+        return getOrder(sourceBizTypeEnum,id);
     }
 
     @Override

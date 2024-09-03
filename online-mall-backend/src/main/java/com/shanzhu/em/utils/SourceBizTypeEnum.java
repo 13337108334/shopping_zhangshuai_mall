@@ -118,7 +118,23 @@ public enum SourceBizTypeEnum {
      * 二进制数字
      */
     private String binaryNum;
-    
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setDescr(String descr) {
+        this.descr = descr;
+    }
+
+    public void setDecimalNum(Long decimalNum) {
+        this.decimalNum = decimalNum;
+    }
+
+    public void setBinaryNum(String binaryNum) {
+        this.binaryNum = binaryNum;
+    }
+
     private SourceBizTypeEnum(String value, String descr) {
         this.value = value;
         this.descr = descr;
