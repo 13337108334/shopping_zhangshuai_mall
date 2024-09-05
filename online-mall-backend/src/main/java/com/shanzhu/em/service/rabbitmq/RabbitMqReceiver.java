@@ -15,7 +15,10 @@ import java.util.Map;
  * @author zhangshuai
  * @datetime 2022/9/1 16:08
  * @desc 消息接收者
+ *
  */
+
+//todo 本地测试需放开注解交给spring管理，上线前放开测试消费,不放开是为了在rabbitmq控制台查看消息
 //@Component
 public class RabbitMqReceiver {
 
