@@ -135,7 +135,7 @@ public enum SourceBizTypeEnum {
         this.binaryNum = binaryNum;
     }
 
-    private SourceBizTypeEnum(String value, String descr) {
+    SourceBizTypeEnum(String value, String descr) {
         this.value = value;
         this.descr = descr;
     }

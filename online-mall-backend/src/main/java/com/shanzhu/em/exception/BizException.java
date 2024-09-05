@@ -12,7 +12,7 @@ public class BizException extends RuntimeException {
     /**
      * 错误码
      */
-    private String code;
+    private final String code;
 
     public BizException(String code, String msg) {
         super(msg);

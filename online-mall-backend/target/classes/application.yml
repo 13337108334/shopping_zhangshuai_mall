@@ -38,6 +38,14 @@ spring:
         max-wait: -1ms
     connect-timeout: 30000ms
 
+  rabbitmq:
+    host: 127.0.0.1
+    password: 123456
+    port: 5672
+    username: zhangshuai
+    virtual-host: /test-host
+
+
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   configuration:

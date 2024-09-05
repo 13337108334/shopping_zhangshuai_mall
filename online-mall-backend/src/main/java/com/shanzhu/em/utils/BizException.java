@@ -13,7 +13,7 @@ public class BizException extends RuntimeException {
     /**
      * 错误码
      */
-    private String errCode;
+    private final String errCode;
     /**
      * 错误信息
      */

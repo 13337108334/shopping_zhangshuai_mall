@@ -21,7 +21,7 @@ public final class ThreadPoolUtils {
      * 通用线程池，适用于 IO 密集型逻辑提高性能，如批量调用 RPC 服务，该线程池应用内
      * 共享，有线程池满的风险，使用前需自行评估风险和线程池配置是否适用你的场景。
      */
-    private static ThreadPoolExecutor COMMON_THREAD_POOL;
+    private static final ThreadPoolExecutor COMMON_THREAD_POOL;
 
     static {
         int corePoolSize = Runtime.getRuntime().availableProcessors() * 5;

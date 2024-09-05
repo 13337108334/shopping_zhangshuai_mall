@@ -1,6 +1,7 @@
 package com.shanzhu.em.service.orderpay;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.ErrorCodeEnum;
@@ -10,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 /**
  * 策略模式-抽象层
@@ -42,4 +45,21 @@ public abstract class AbstractPayService implements PayService {
             return ResultData.genException(ErrorCodeAndMessage.THROW_DB_EXCEPTION.getStringErrorCode(), ErrorCodeAndMessage.THROW_DB_EXCEPTION.getErrorMessage());
         }
     }
+
+    /**
+     *
+     * @param sourceBizTypeEnum 来源类型
+     * @param resultData        订单数据
+     * @return  消息内容
+     */
+    protected JSONObject getJsonObject(SourceBizTypeEnum sourceBizTypeEnum, ResultData<Order> resultData) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("id", resultData.getData().getId());
+        jsonObject.put("sourceBizType", sourceBizTypeEnum.getValue());
+        jsonObject.put("resultData", resultData);
+        jsonObject.put("status", "订单已支付");
+        jsonObject.put("time", new Date(System.currentTimeMillis()));
+        return jsonObject;
+    }
+
 }

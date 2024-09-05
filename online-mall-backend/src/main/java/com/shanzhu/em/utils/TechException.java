@@ -10,7 +10,7 @@ public class TechException extends RuntimeException {
 
     private static final long serialVersionUID = -238574834802327692L;
 
-    private String errCode;
+    private final String errCode;
 
     private String errMsg;
 

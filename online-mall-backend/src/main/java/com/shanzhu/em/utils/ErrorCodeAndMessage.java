@@ -174,7 +174,7 @@ public enum ErrorCodeAndMessage {
 
     PRODUCT_ID_IS_NULL(100005, "id为空");
 
-    private ErrorCodeAndMessage(int errorCode, String errorMessage) {
+    ErrorCodeAndMessage(int errorCode, String errorMessage) {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
     }
