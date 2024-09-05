@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @ActiveProfiles("application.yml")
@@ -23,7 +24,7 @@ class DemoApplicationTests {
     jsonObject.put("name", "豫章故郡 洪都新府 星分翼轸 地接衡庐 襟三江而带五湖 控蛮荆而引瓯越");
     jsonObject.put("age", JSON.toJSONString(18));
     jsonObject.put("address", "江西省南昌市");
-    jsonObject.put("time", JSON.toJSONString(new Date(System.currentTimeMillis())));
+    jsonObject.put("time", JSON.toJSONString(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())));
     Message message = new Message(jsonObject.toJSONString().getBytes());
     rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, "test", message);
   }

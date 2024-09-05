@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -57,7 +58,7 @@ public abstract class AbstractPayService implements PayService {
         jsonObject.put("payType", payTypeEnum.getValue());
         jsonObject.put("resultData", resultData);
         jsonObject.put("status", "订单已支付");
-        jsonObject.put("time", new Date(System.currentTimeMillis()));
+        jsonObject.put("time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         return jsonObject;
     }
 
