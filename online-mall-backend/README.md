@@ -43,7 +43,6 @@ java 1.8
     默认密码guest
 
 
-
 二、启动前：
 yml: jdbc:mysql://localhost:3306/DB_OnlineMall?serverTimezone=GMT%2b8&useSSL=false
 1、新建数据库 DB_OnlineMall
