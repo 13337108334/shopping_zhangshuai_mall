@@ -7,7 +7,7 @@ java 1.8
 异常类、BeanCopy类（包含一键拷贝集合）、多线程类、返回值、枚举类都封装好了 提供整套能力
 后续开发极度舒适！
 前端 vue+js+nodejs
-后端 jdk1.8+springBoot+maven+mybaties+mysql+rabbitMQ
+后端 jdk1.8+springBoot+maven+mybaties+mysql+rabbitMQ+redis
 设计模式使用：工厂+模版+策略 详见此包 com/shanzhu/em/service/orderpay/impl/AliPayServiceImpl
 异步使用
     线程池ThreadPoolUtils  详见此包 com/shanzhu/em/utils
