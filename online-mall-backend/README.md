@@ -4,17 +4,44 @@
 网上购物商城-后端
 java 1.8
 拦截器 interceptor-> controller-> service-> mapper 简单结构
-异常类、BeanCopy类（包含一键拷贝集合）、多线程类、返回值都封装好了
-后续开发极度舒适
-前端vue+js，后端jdk1.8+springBoot+mybaties+mysql
+异常类、BeanCopy类（包含一键拷贝集合）、多线程类、返回值、枚举类都封装好了 提供整套能力
+后续开发极度舒适！
+前端 vue+js+nodejs
+后端 jdk1.8+springBoot+maven+mybaties+mysql+rabbitMQ
+设计模式使用：工厂+模版+策略 详见此包 com/shanzhu/em/service/orderpay/impl/AliPayServiceImpl
+异步使用
+    线程池ThreadPoolUtils  详见此包 com/shanzhu/em/utils
+    rabbitMQ 详见此包 com/shanzhu/em/service/rabbitmq
 
 一、所需环境
 1、maven 3.3.3以上 需要手动配置settings.xml文件为阿里云镜像  标签别改错！标签别改错！标签别改错！
 2、redis 2.0以上
-3、git
+3、git/github
 4、mysql 5.7以上  root  123456 （默认密码root需要改为123456）
 5、jdk 1.8以上
 6、nodejs 16.13.2以上
+7、rabbitmq 
+
+    mac配置rabbitmq安装文档： https://blog.csdn.net/marsjin/article/details/135938937
+    rabbitmq集成springboot文档： https://blog.csdn.net/lvoelife/article/details/126622148
+    修改yml文件 配置EXCHANGE/QUEUE
+
+    环境变量配置
+    export RABBIT_HOME=/usr/local/Cellar/rabbitmq/3.13.7(改为你自己的)
+    export PATH=$PATH:$RABBIT_HOME/sbin
+    
+    rabbitmq启动命令 
+    sudo rabbitmq-server -detached
+    
+    查看rabbitmq状态
+    sudo rabbitmqctl status
+    
+    访问rabbitmq页面
+    http://localhost:15672
+    
+    默认账号guest 
+    默认密码guest
+
 
 
 二、启动前：
@@ -28,11 +55,11 @@ yml: jdbc:mysql://localhost:3306/DB_OnlineMall?serverTimezone=GMT%2b8&useSSL=fal
 如果依赖下载不下来 就去百度搜一下换最新的淘宝镜像
 最后执行npm run dev
 6、前后端启动之后 看超管的数据库密码，数据库里默认存的是前端md5加密过的密码，需要手动去数据库改密码，可以debug或日志把输入加密后的密码打印出来
-7、com.shanzhu.em.controller.UserController#login 这是登陆的controller  (这是入参日志 controller, param loginForm:{} )
+7、com.shanzhu.em.controller.UserController#login 这是登陆的controller  (这是入参日志 controller, param loginForm )
 service -> com.shanzhu.em.service.UserService#login 这是登陆的service
 8、前端登陆页面已升级为黑悟空 vue 自己研究
 
-三、推荐安装IDEA plug 市场插件： MybatiesPlus\lombok Builder Helper \Maven Helper（项目模块右键 maven clean install）\ vue.js
+三、推荐安装IDEA plug 市场插件： MybatiesPlus、lombok Builder Helper 、Maven Helper（项目模块右键 maven clean install）、vue.js
 
 <img width="874" alt="image" src="https://github.com/user-attachments/assets/ebbcd0f0-81d0-40ab-b259-02dbb43852be">
 
@@ -47,6 +74,7 @@ service -> com.shanzhu.em.service.UserService#login 这是登陆的service
 <img width="1383" alt="image" src="https://github.com/user-attachments/assets/14796af4-c95f-48b3-b205-e463e09ecd64">
 
 <img width="1396" alt="image" src="https://github.com/user-attachments/assets/92774162-cb4e-4041-9ebd-842542ebca0c">
+
 
 
 
