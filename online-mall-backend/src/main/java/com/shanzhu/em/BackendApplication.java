@@ -21,9 +21,7 @@ public class BackendApplication {
 
         //SpringBoot 执行启动
         SpringApplication.run(BackendApplication.class, args);
-
         log.info("=====================项目后端启动成功============================");
-        log.info("=====================2222============================");
         log.info("=====================2222============================");
     }
 
