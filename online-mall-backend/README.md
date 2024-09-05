@@ -42,6 +42,9 @@ java 1.8
     默认账号guest 
     默认密码guest
 
+示例：
+<img width="1429" alt="image" src="https://github.com/user-attachments/assets/135be990-ad9f-4678-a3b5-c2e09997050e">
+
 
 二、启动前：
 yml: jdbc:mysql://localhost:3306/DB_OnlineMall?serverTimezone=GMT%2b8&useSSL=false
@@ -73,6 +76,7 @@ service -> com.shanzhu.em.service.UserService#login 这是登陆的service
 <img width="1383" alt="image" src="https://github.com/user-attachments/assets/14796af4-c95f-48b3-b205-e463e09ecd64">
 
 <img width="1396" alt="image" src="https://github.com/user-attachments/assets/92774162-cb4e-4041-9ebd-842542ebca0c">
+
 
 
 
