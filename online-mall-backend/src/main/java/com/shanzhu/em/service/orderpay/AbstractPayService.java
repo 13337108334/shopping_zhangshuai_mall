@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.utils.ErrorCodeAndMessage;
-import com.shanzhu.em.utils.ErrorCodeEnum;
+import com.shanzhu.em.utils.PayTypeEnum;
 import com.shanzhu.em.utils.ResultData;
-import com.shanzhu.em.utils.SourceBizTypeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +27,17 @@ public abstract class AbstractPayService implements PayService {
     @Autowired
     OrderService orderService;
 
-    protected ResultData<Order> getOrder(SourceBizTypeEnum sourceBizTypeEnum, Long id) {
+    protected ResultData<Order> getOrder(PayTypeEnum payTypeEnum, Long id) {
         try {
             Order order = orderService.getOrder(id);
             if (order == null) {
-                logger.error("AbstractPayService getOrder order is null 订单id为:{},sourceBizTypeEnum:{}", JSON.toJSONString(id), JSON.toJSONString(sourceBizTypeEnum));
+                logger.error("AbstractPayService getOrder order is null 订单id为:{},sourceBizTypeEnum:{}", JSON.toJSONString(id), JSON.toJSONString(payTypeEnum));
                 return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
             }
-            // 植入来源类型在model的goods字段，方便通过返回值看来源类型
-            order.setGoods(sourceBizTypeEnum.getValue());
+            // 植入来源类型在model的payType字段，方便通过返回值看来源类型
+            order.setPayType(payTypeEnum.getValue());
             ResultData<Order> resultData = ResultData.genSuccess(order);
-            logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()), JSON.toJSONString(resultData));
+            logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(resultData));
             return resultData;
         } catch (Exception e) {
             logger.error("AbstractPayService getOrder error,id:{},e:{}", id, e);
@@ -48,14 +47,14 @@ public abstract class AbstractPayService implements PayService {
 
     /**
      *
-     * @param sourceBizTypeEnum 来源类型
+     * @param payTypeEnum 来源类型
      * @param resultData        订单数据
      * @return  消息内容
      */
-    protected JSONObject getJsonObject(SourceBizTypeEnum sourceBizTypeEnum, ResultData<Order> resultData) {
+    protected JSONObject getJsonObject(PayTypeEnum payTypeEnum, ResultData<Order> resultData) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", resultData.getData().getId());
-        jsonObject.put("sourceBizType", sourceBizTypeEnum.getValue());
+        jsonObject.put("payType", payTypeEnum.getValue());
         jsonObject.put("resultData", resultData);
         jsonObject.put("status", "订单已支付");
         jsonObject.put("time", new Date(System.currentTimeMillis()));

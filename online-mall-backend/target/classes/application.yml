@@ -38,6 +38,7 @@ spring:
         max-wait: -1ms
     connect-timeout: 30000ms
 
+  # Rabbitmq
   rabbitmq:
     host: 127.0.0.1
     password: 123456

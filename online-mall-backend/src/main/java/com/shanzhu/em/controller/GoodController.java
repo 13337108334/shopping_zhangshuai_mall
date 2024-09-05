@@ -5,17 +5,14 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.shanzhu.em.common.R;
 import com.shanzhu.em.constants.Status;
-import com.shanzhu.em.entity.Good;
-import com.shanzhu.em.entity.Order;
-import com.shanzhu.em.entity.Standard;
-import com.shanzhu.em.entity.User;
+import com.shanzhu.em.entity.*;
 import com.shanzhu.em.entity.vo.GoodVo;
 import com.shanzhu.em.service.GoodService;
 import com.shanzhu.em.service.StandardService;
 import com.shanzhu.em.service.orderpay.PayLogic;
+import com.shanzhu.em.utils.PayTypeEnum;
 import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.ResultData;
-import com.shanzhu.em.utils.SourceBizTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,33 +64,33 @@ public class GoodController {
     @GetMapping("/logic")
     public ResultData<Order> logicController() {
         log.info("TestController logicController -1 进入controller代码");
-        SourceBizTypeEnum sourceBizTypeEnum1 = SourceBizTypeEnum.of("alipay");
-        SourceBizTypeEnum sourceBizTypeEnum2 = SourceBizTypeEnum.of("wechatpay");
-        SourceBizTypeEnum sourceBizTypeEnum3 = SourceBizTypeEnum.of("otherpay");
-        SourceBizTypeEnum sourceBizTypeEnum4 = SourceBizTypeEnum.of("第四个取不到返回null 程序不能中断");
+        PayTypeEnum payTypeEnum1 = PayTypeEnum.of("alipay");
+        PayTypeEnum payTypeEnum2 = PayTypeEnum.of("wechatpay");
+        PayTypeEnum payTypeEnum3 = PayTypeEnum.of("otherpay");
+        PayTypeEnum payTypeEnum4 = PayTypeEnum.of("第四个取不到返回null 程序不能中断");
 
-        List<SourceBizTypeEnum> sourceBizTypeEnumList = new ArrayList<>();
-        sourceBizTypeEnumList.add(sourceBizTypeEnum1);
-        sourceBizTypeEnumList.add(sourceBizTypeEnum2);
-        sourceBizTypeEnumList.add(sourceBizTypeEnum3);
-        sourceBizTypeEnumList.add(sourceBizTypeEnum4);
-        log.info("TestController logicController -2 sourceBizTypeEnumList:{}", JSON.toJSONString(sourceBizTypeEnumList));
-        if (CollectionUtils.isEmpty(sourceBizTypeEnumList)) {
+        List<PayTypeEnum> payTypeEnumList = new ArrayList<>();
+        payTypeEnumList.add(payTypeEnum1);
+        payTypeEnumList.add(payTypeEnum2);
+        payTypeEnumList.add(payTypeEnum3);
+        payTypeEnumList.add(payTypeEnum4);
+        log.info("TestController logicController -2 sourceBizTypeEnumList:{}", JSON.toJSONString(payTypeEnumList));
+        if (CollectionUtils.isEmpty(payTypeEnumList)) {
             ResultData<Order> resultData = ResultData.genError(ErrorCodeAndMessage.SOURCE_LIST_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.SOURCE_LIST_IS_NULL.getErrorMessage());
             log.error("TestController logicController sourceBizTypeEnumList is null 程序返回结果为 result：{}",JSON.toJSONString(resultData));
             return resultData;
         }
         // 打乱集合顺序 枚举随机从集合取第一个值作为一个随机来源类型向下传递
-        Collections.shuffle(sourceBizTypeEnumList);
-        SourceBizTypeEnum sourceBizTypeEnum = sourceBizTypeEnumList.get(0);
-        log.info("TestController logicController sourceBizTypeEnum:{}", JSON.toJSONString(sourceBizTypeEnum));
-        if (sourceBizTypeEnum == null) {
+        Collections.shuffle(payTypeEnumList);
+        PayTypeEnum payTypeEnum = payTypeEnumList.get(0);
+        log.info("TestController logicController sourceBizTypeEnum:{}", JSON.toJSONString(payTypeEnum));
+        if (payTypeEnum == null) {
             ResultData<Order> resultData = ResultData.genError(ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getErrorMessage());
             log.error("TestController logicController sourceBizTypeEnum来源类型随机取到了null 程序返回结果为 result：{}",JSON.toJSONString(resultData));
             return resultData;
         }
-        log.info("TestController logicController -3 sourceBizTypeEnum:{},sourceBizTypeEnum.value:{}", JSON.toJSONString(sourceBizTypeEnum), JSON.toJSONString(sourceBizTypeEnum.getValue()));
-        return payLogic.logic(sourceBizTypeEnum, ORDER_LONG_ID);
+        log.info("TestController logicController -3 sourceBizTypeEnum:{},sourceBizTypeEnum.value:{}", JSON.toJSONString(payTypeEnum), JSON.toJSONString(payTypeEnum.getValue()));
+        return payLogic.logic(payTypeEnum, ORDER_LONG_ID);
     }
 
     /**

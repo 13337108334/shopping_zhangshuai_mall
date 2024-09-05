@@ -1,8 +1,8 @@
 package com.shanzhu.em.service.orderpay.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.shanzhu.em.entity.Order;
+import com.shanzhu.em.utils.PayTypeEnum;
 import com.shanzhu.em.service.orderpay.AbstractPayService;
 import com.shanzhu.em.service.rabbitmq.RabbitFanoutExchangeConfig;
 import com.shanzhu.em.service.rabbitmq.RabbitMqSenderService;
@@ -28,31 +28,25 @@ public class WechatServiceImpl extends AbstractPayService {
     private RabbitMqSenderService rabbitMqSenderService;
 
     @Override
-    public ResultData<Order> buildParam(SourceBizTypeEnum sourceBizTypeEnum, Long id) {
-        if (sourceBizTypeEnum == null) {
-            logger.error("WechatServiceImpl buildParam sourceBizTypeEnum is null");
+    public ResultData<Order> buildParam(PayTypeEnum payTypeEnum, Long id) {
+        if (payTypeEnum == null) {
+            logger.error("WechatServiceImpl buildParam payTypeEnum is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
         }
         if (id == null) {
             logger.error("WechatServiceImpl buildParam id is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getErrorMessage());
         }
-        logger.info("WechatServiceImpl buildParam sourceBizTypeEnum.value:{}, id:{}", JSON.toJSONString(sourceBizTypeEnum.getValue()), JSON.toJSONString(id));
+        logger.info("WechatServiceImpl buildParam payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
         //todo 微信订单业务逻辑
-        ResultData<Order> resultData = getOrder(sourceBizTypeEnum, id);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("id", resultData.getData().getId());
-        jsonObject.put("sourceBizType", sourceBizTypeEnum.getValue());
-        jsonObject.put("resultData", resultData);
-        jsonObject.put("status", "订单已支付");
-        Message message = new Message(jsonObject.toJSONString().getBytes());
+        ResultData<Order> resultData = getOrder(payTypeEnum, id);
         // 发送微信订单支付消息
-        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_WECHAT, new Message(getJsonObject(sourceBizTypeEnum, resultData).toJSONString().getBytes()));
+        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_WECHAT, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
         return resultData;
     }
 
     @Override
-    public SourceBizTypeEnum getSourceBizType() {
-        return SourceBizTypeEnum.WECHATPAY;
+    public PayTypeEnum getSourceBizType() {
+        return PayTypeEnum.WECHATPAY;
     }
 }

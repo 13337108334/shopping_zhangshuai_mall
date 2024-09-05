@@ -1,8 +1,8 @@
 package com.shanzhu.em.service.orderpay;
 
 import com.shanzhu.em.entity.Order;
+import com.shanzhu.em.utils.PayTypeEnum;
 import com.shanzhu.em.utils.ResultData;
-import com.shanzhu.em.utils.SourceBizTypeEnum;
 
 /**
  * 支付接口
@@ -11,8 +11,8 @@ import com.shanzhu.em.utils.SourceBizTypeEnum;
  */
 public interface PayService {
 
-    ResultData<Order> buildParam(SourceBizTypeEnum sourceBizTypeEnum, Long id);
+    ResultData<Order> buildParam(PayTypeEnum payTypeEnum, Long id);
 
-    SourceBizTypeEnum getSourceBizType();
+    PayTypeEnum getSourceBizType();
 
 }

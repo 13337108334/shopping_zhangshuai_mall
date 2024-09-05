@@ -77,4 +77,10 @@ public class Order extends Model<Order> {
     @TableField(exist = false)
     private Long cartId;
 
+    /**
+     * 支付类型  PayTypeEnum
+     */
+    @TableField(exist = false)
+    private String payType;
+
 }
