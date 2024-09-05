@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
+ * 微信订单支付
  * @author zhangshuai
  * @Date 2024/09/03
  */
