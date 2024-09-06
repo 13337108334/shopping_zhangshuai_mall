@@ -30,19 +30,22 @@ public class OtherPayServiceImpl extends AbstractPayService {
     private RabbitMqSenderService rabbitMqSenderService;
 
     @Override
-    public ResultData<Order> buildParam(PayTypeEnum payTypeEnum, Long id) {
+    public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         if (payTypeEnum == null) {
-            logger.error("OtherPayServiceImpl buildParam payTypeEnum is null");
+            logger.error("OtherPayServiceImpl payOrder payTypeEnum is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
         }
         if (id == null) {
-            logger.error("OtherPayServiceImpl buildParam id is null");
+            logger.error("OtherPayServiceImpl payOrder id is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getErrorMessage());
         }
-        logger.info("OtherPayServiceImpl buildParam payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
-        //todo 其他订单业务逻辑
+        logger.info("OtherPayServiceImpl payOrder payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
         ResultData<Order> resultData = getOrder(payTypeEnum, id);
-        // 发送其他订单支付消息
+        if(resultData == null || !resultData.isSuccess() || resultData.getData() == null) {
+            return resultData;
+        }
+        //todo 其他订单支付对接-待开发
+        // 支付成功发送其他订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_OTHERPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
         return resultData;
     }

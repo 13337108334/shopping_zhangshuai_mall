@@ -195,11 +195,33 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         return orderMapper.receiveOrder(orderNo);
     }
 
+    /**
+     * 根据id查询订单详情
+     *
+     * @param id
+     * @return
+     */
     public Order getOrder(Long id) {
         if (id == null) {
             logger.error("OrderService getOrder service过来的 id is null");
             return null;
         }
-        return  orderMapper.selectById(id);
+        return orderMapper.selectById(id);
     }
+
+    /**
+     * 更新订单
+     *
+     * @param order
+     * @return 0/1
+     */
+    public Boolean updateOrder(Order order) {
+        if (order == null || order.getId() == null) {
+            logger.error("传入订单数据为空/传入订单id为空");
+            throw new BizException(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
+        }
+        int i = orderMapper.updateById(order);
+        return i == 1;
+    }
+
 }

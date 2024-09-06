@@ -11,7 +11,7 @@ import com.shanzhu.em.utils.ResultData;
  */
 public interface PayService {
 
-    ResultData<Order> buildParam(PayTypeEnum payTypeEnum, Long id);
+    ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id);
 
     PayTypeEnum getSourceBizType();
 

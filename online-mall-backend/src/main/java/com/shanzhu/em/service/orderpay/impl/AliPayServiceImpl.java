@@ -32,20 +32,22 @@ public class AliPayServiceImpl extends AbstractPayService {
 
 
     @Override
-    public ResultData<Order> buildParam(PayTypeEnum payTypeEnum, Long id) {
+    public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         if (payTypeEnum == null) {
-            logger.error("AliPayServiceImpl buildParam payTypeEnum is null");
+            logger.error("AliPayServiceImpl payOrder payTypeEnum is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
         }
         if (id == null) {
-            logger.error("AliPayServiceImpl buildParam id is null");
+            logger.error("AliPayServiceImpl payOrder id is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
         }
-        logger.info("AliPayServiceImpl buildParam payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
-        //todo 阿里订单业务逻辑
+        logger.info("AliPayServiceImpl payOrder payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
         ResultData<Order> resultData = getOrder(payTypeEnum, id);
-        ;
-        // 发送阿里订单消息
+        if(resultData == null || !resultData.isSuccess() || resultData.getData() == null) {
+            return resultData;
+        }
+        //todo 阿里订单支付对接-待开发
+        // 支付成功发送阿里订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_AlIPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
         return resultData;
     }

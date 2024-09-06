@@ -43,7 +43,7 @@ public class PayLogic implements InitializingBean {
         }
         PayService payService = serviceMap.get(payTypeEnum.getValue());
         log.info("PayLogic logic payService:{}", JSON.toJSONString(payService));
-        return payService.buildParam(payTypeEnum, id);
+        return payService.payOrder(payTypeEnum, id);
     }
 
     @Override

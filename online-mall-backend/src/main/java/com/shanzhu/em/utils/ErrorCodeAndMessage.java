@@ -9,7 +9,24 @@ public enum ErrorCodeAndMessage {
     /**
      * 查询订单结果为空
      */
-    ORDER_IS_NULL(10008, "查询订单结果为空,请检查订单表是否存在该id对应的订单"),
+    ORDER_IS_NULL(10008, "未查询到该笔订单,请检查订单表是否存在该id对应的订单"),
+
+     /**
+     * 更新订单失败
+     */
+     UPDATE_ORDER_ERROR(10071, "操作DB更新订单失败"),
+
+
+    /**
+     * 不存在的宽表操作类型 ActionTypeContent
+     */
+    OPEN_SEARCH_ACTION_IS_NULL(10001, "宽表操作类型传入有误,请检查业务中传过来的actionType字段"),
+
+
+    /**
+     * 订单已支付 无需再次支付
+     */
+    ORDER_IS_ALREADY_PAY(10007, "该订单已支付 无需再次支付"),
 
     /**
      * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum，如新增实现需要在该枚举类下新增类型 并在orderpay/impl包下新增实现)

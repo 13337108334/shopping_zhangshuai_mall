@@ -714,7 +714,9 @@
           <root url="jar:///usr/local/m2/org/springframework/amqp/spring-amqp/2.3.11/spring-amqp-2.3.11.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/.ideaLibSources/spring-amqp-2.3.11-sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">

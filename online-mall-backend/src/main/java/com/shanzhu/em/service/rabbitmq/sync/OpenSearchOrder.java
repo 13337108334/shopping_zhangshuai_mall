@@ -1,30 +1,26 @@
-package com.shanzhu.em.entity;
+package com.shanzhu.em.service.rabbitmq.sync;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * 订单
+ * 订单宽表数据模型
  *
- * @author: ZhangDaYe
- * @date: 2024-08-24
+ * @author: zhangshuai
+ * @date: 2024-09-06
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_order")
-public class Order extends Model<Order> {
+public class OpenSearchOrder implements Serializable {
+
+    private static final long                     serialVersionUID = -884605515550771001L;
 
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     /**
@@ -63,25 +59,38 @@ public class Order extends Model<Order> {
     private String state;
 
     /**
-     * 创建时间
+     * DB创建时间
      */
     private String createTime;
 
     /**
+     * 消息发送时间
+     */
+    private String messageCreateTime;
+
+    /**
+     * 宽表创建时间
+     */
+    private String openSearchCreateTime;
+
+    /**
      * 该订单包含的商品信息
      */
-    @TableField(exist = false)
     private String goods;
 
     /**
      * 对应购物车id
      */
-    @TableField(exist = false)
     private Long cartId;
 
     /**
      * 支付类型  PayTypeEnum
      */
     private String payType;
+
+    /**
+     * 行为类型，增、删、改
+     */
+    private String actionType;
 
 }

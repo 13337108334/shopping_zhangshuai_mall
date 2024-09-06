@@ -22,7 +22,8 @@ public class RabbitMqSenderService {
 
   private static final Logger logger = LoggerFactory.getLogger(RabbitMqSenderService.class);
 
-  @Autowired private RabbitTemplate rabbitTemplate;
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
   /**
    * 消息发送者
    *
