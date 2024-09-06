@@ -3,7 +3,8 @@ package com.shanzhu.em.service.orderpay;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.shanzhu.em.entity.Order;
-import com.shanzhu.em.service.rabbitmq.sync.ActionTypeContent;
+
+import com.shanzhu.em.sync.ActionTypeContent;
 import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.PayTypeEnum;
 import com.shanzhu.em.utils.ResultData;

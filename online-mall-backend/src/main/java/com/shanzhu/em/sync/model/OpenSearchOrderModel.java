@@ -1,7 +1,5 @@
-package com.shanzhu.em.service.rabbitmq.sync;
+package com.shanzhu.em.sync.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,7 +12,7 @@ import java.math.BigDecimal;
  * @date: 2024-09-06
  */
 @Data
-public class OpenSearchOrder implements Serializable {
+public class OpenSearchOrderModel implements Serializable {
 
     private static final long                     serialVersionUID = -884605515550771001L;
 

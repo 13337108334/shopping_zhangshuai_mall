@@ -1,9 +1,10 @@
-package com.shanzhu.em.service.rabbitmq.sync;
+package com.shanzhu.em.sync;
 
 import com.alibaba.fastjson.JSON;
 import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.service.orderpay.OrderService;
 import com.shanzhu.em.service.rabbitmq.RabbitFanoutExchangeConfig;
+import com.shanzhu.em.sync.model.OpenSearchOrderParam;
 import com.shanzhu.em.utils.BizException;
 import com.shanzhu.em.utils.ErrorCodeAndMessage;
 import com.shanzhu.em.utils.ResultData;
@@ -44,6 +45,7 @@ public class OrderDBSyncOpenSearchHandler {
      */
     @RabbitListener(queues = RabbitFanoutExchangeConfig.QUEUE)
     public void SyncOpenSearchReceiverMsgHandle(String msg) {
+        // 1、转换模型
         logger.info("消息已成功接收 msg body:{}", JSON.toJSONString(msg));
         Map<String, Map<String, String>> map = new HashMap<>();
         ResultData sourceResultData = new ResultData();
@@ -59,11 +61,14 @@ public class OrderDBSyncOpenSearchHandler {
         ResultData<Order> targetResult = new ResultData<>();
         convertResult(sourceResultData, targetResult);
         Order orderModel = targetResult.getData();
-        // 校验数据
+
+        // 2、校验数据
         if (targetResult == null || !targetResult.isSuccess() || targetResult.getData() == null) {
             logger.error("消息消费失败 , targetResult is null");
             return;
         }
+
+        // 3、更新DB 并同步openSearch宽表
         // 行动点
         String actionType = String.valueOf(map.get("actionType"));
         // 消息发送时间
@@ -73,10 +78,7 @@ public class OrderDBSyncOpenSearchHandler {
 
         try {
             // 支付成功后更新数据库字段
-            if (!orderService.updateOrder(orderModel)) {
-                logger.error("操作DB更新订单失败");
-                throw new BizException(ErrorCodeAndMessage.UPDATE_ORDER_ERROR.getStringErrorCode(), ErrorCodeAndMessage.UPDATE_ORDER_ERROR.getErrorMessage());
-            }
+            dbUpdate(orderModel);
             // 支付成功后根据类型去同步到宽表数据
             openSearchSynchronize(orderModel, actionType, messageCreateTime);
         } catch (Exception e) {
@@ -87,11 +89,16 @@ public class OrderDBSyncOpenSearchHandler {
     }
 
     private void dbUpdate(Order orderModel) {
-
+        Boolean sign = orderService.updateOrder(orderModel);
+        if (!sign) {
+            logger.error("操作DB更新订单失败");
+            throw new BizException(ErrorCodeAndMessage.UPDATE_ORDER_ERROR.getStringErrorCode(), ErrorCodeAndMessage.UPDATE_ORDER_ERROR.getErrorMessage());
+        }
+        logger.info("操作DB更新订单成功");
     }
 
     private void openSearchSynchronize(Order orderModel, String actionType, String messageCreateTime) throws Exception {
-        OpenSearchOrder openSearchOrderParam = new OpenSearchOrder();
+        OpenSearchOrderParam openSearchOrderParam = new OpenSearchOrderParam();
         BeanUtils.copyProperties(orderModel, openSearchOrderParam);
         // 宽表创建时间为当前时间
         openSearchOrderParam.setOpenSearchCreateTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms").format(new Date()));
@@ -115,7 +122,7 @@ public class OrderDBSyncOpenSearchHandler {
                 logger.info("openSearchSynchronize DELETE 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
                 break;
             default:
-                logger.error("openSearchSynchronize 宽表类型传入有误 抛出异常");
+                logger.error("openSearchSynchronize 宽表类型 actionType字段 传入有误 抛出异常 ");
                 throw new BizException(ErrorCodeAndMessage.OPEN_SEARCH_ACTION_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.OPEN_SEARCH_ACTION_IS_NULL.getErrorMessage());
         }
     }

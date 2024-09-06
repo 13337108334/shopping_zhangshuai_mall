@@ -1,9 +1,4 @@
-package com.shanzhu.em.service.rabbitmq.sync;
-
-import com.alibaba.druid.util.StringUtils;
-
-import java.util.Arrays;
-import java.util.Optional;
+package com.shanzhu.em.sync;
 
 public class ActionTypeContent {
     /**
