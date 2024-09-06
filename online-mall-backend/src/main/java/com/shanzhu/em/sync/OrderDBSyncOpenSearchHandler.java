@@ -14,6 +14,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 3次重试/5s重试一次
  * @author zhangshuai
  * @datetime 2022/9/1 16:08
  * @desc 消息接收者
@@ -44,7 +46,8 @@ public class OrderDBSyncOpenSearchHandler {
      * @datetime 2022/9/1:16:11
      */
     @RabbitListener(queues = RabbitFanoutExchangeConfig.QUEUE)
-    public void SyncOpenSearchReceiverMsgHandle(String msg) {
+    @Transactional
+    public void SyncOpenSearchReceiverMsgHandle(String msg) throws Exception {
         // 1、转换模型
         logger.info("消息已成功接收 msg body:{}", JSON.toJSONString(msg));
         Map<String, Map<String, String>> map = new HashMap<>();
@@ -75,20 +78,16 @@ public class OrderDBSyncOpenSearchHandler {
         String messageCreateTime = String.valueOf(map.get("time"));
 
         logger.info("actionType:{}", JSON.toJSONString(actionType));
-
-        try {
             // 支付成功后更新数据库字段
             dbUpdate(orderModel);
             // 支付成功后根据类型去同步到宽表数据
+            // 事务回滚测试
+            // orderModel = null ;
             openSearchSynchronize(orderModel, actionType, messageCreateTime);
-        } catch (Exception e) {
-            logger.error("actionType:{},e:{}", JSON.toJSONString(actionType), e);
-            return;
-        }
-
     }
 
-    private void dbUpdate(Order orderModel) {
+
+    public void dbUpdate(Order orderModel) {
         Boolean sign = orderService.updateOrder(orderModel);
         if (!sign) {
             logger.error("操作DB更新订单失败");
@@ -97,7 +96,8 @@ public class OrderDBSyncOpenSearchHandler {
         logger.info("操作DB更新订单成功");
     }
 
-    private void openSearchSynchronize(Order orderModel, String actionType, String messageCreateTime) throws Exception {
+
+    public void openSearchSynchronize(Order orderModel, String actionType, String messageCreateTime) {
         OpenSearchOrderParam openSearchOrderParam = new OpenSearchOrderParam();
         BeanUtils.copyProperties(orderModel, openSearchOrderParam);
         // 宽表创建时间为当前时间

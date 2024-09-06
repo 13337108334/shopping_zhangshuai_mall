@@ -45,6 +45,12 @@ spring:
     port: 5672
     username: zhangshuai
     virtual-host: /test-host
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 3  # 最大重试次数
+          initial-interval: 5000  # 首次重试间隔时间
 
 
 mybatis:

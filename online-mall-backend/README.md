@@ -7,11 +7,13 @@ java 1.8
 异常类、BeanCopy类（包含一键拷贝集合）、多线程类、返回值、枚举类都封装好了 提供整套能力
 后续开发极度舒适！
 前端 vue+js+nodejs
-后端 jdk1.8+springBoot+maven+mybaties+mysql+rabbitMQ+redis
+后端 jdk1.8+springBoot+maven+mybaties+mysql+rabbitMQ+redis+openSearch宽表
 设计模式使用：工厂+模版+策略 详见此包 com/shanzhu/em/service/orderpay/impl/AliPayServiceImpl
 异步使用
     线程池ThreadPoolUtils  详见此包 com/shanzhu/em/utils
     rabbitMQ 详见此包 com/shanzhu/em/service/rabbitmq
+数据库同步宽表openSearch+事务回滚+消息处理使用
+    com/shanzhu/em/sync/OrderDBSyncOpenSearchHandler
 
 一、所需环境
 1、maven 3.3.3以上 需要手动配置settings.xml文件为阿里云镜像  标签别改错！标签别改错！标签别改错！
