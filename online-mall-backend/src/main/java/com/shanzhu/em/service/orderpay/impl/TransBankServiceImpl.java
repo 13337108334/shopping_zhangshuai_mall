@@ -32,26 +32,8 @@ public class TransBankServiceImpl extends AbstractPayService {
 
     @Override
     public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
-        if (payTypeEnum == null) {
-            logger.error("TransBankServiceImpl payOrder payTypeEnum is null");
-            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
-        }
-        if (id == null) {
-            logger.error("TransBankServiceImpl payOrder id is null");
-            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getErrorMessage());
-        }
-        logger.info("TransBankServiceImpl payOrder payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
-        ResultData<Order> resultData = getOrder(payTypeEnum, id);
-        if(resultData == null || !resultData.isSuccess() || resultData.getData() == null) {
-            throw new BizException(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
-        }
-        if(StringUtils.isEmpty(resultData.getData().getState())) {
-            throw new BizException(ErrorCodeAndMessage.ORDER_STATE_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_STATE_IS_NULL.getErrorMessage());
-        }
-        if ("已支付".equals(resultData.getData().getState())) {
-            logger.error("TransBankServiceImpl getOrder order state 订单id为:{},status:{} desc:{}", JSON.toJSONString(id), JSON.toJSONString(resultData.getData().getState()),"该订单已支付 无需再次支付");
-            return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getErrorMessage());
-        }
+        logger.info("----------TransBankServiceImpl payOrder ----------");
+        ResultData<Order> resultData = getOrderResultData(payTypeEnum, id);
         //todo 银行订单支付对接-待开发
         // 支付成功发送银行订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_TRANSBANKPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
