@@ -14,7 +14,7 @@ public enum ErrorCodeAndMessage {
     /**
      * 订单状态异常/已撤回 该笔订单不存在
      */
-    ORDER_STATE_IS_NULL(10008, "订单状态异常/已撤回 该笔订单不存在"),
+    ORDER_STATE_IS_NULL(10018, "订单状态异常/已撤回 该笔订单不存在"),
 
      /**
      * 更新订单失败
@@ -31,7 +31,7 @@ public enum ErrorCodeAndMessage {
     /**
      * 订单已支付 无需再次支付
      */
-    ORDER_IS_ALREADY_PAY(10007, "该订单已支付 无需再次支付"),
+    ORDER_IS_ALREADY_PAY(100017, "该订单已支付/已确认收货 无需重复支付"),
 
     /**
      * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum，如新增实现需要在该枚举类下新增类型 并在orderpay/impl包下新增实现)
