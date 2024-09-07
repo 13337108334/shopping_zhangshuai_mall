@@ -92,6 +92,7 @@ public class OrderDBSyncOpenSearchHandler {
 
     public void dbUpdate(Order orderModel,String payType) {
         orderModel.setPayType(payType);
+        orderModel.setState("已支付");
         Boolean sign = orderService.updateOrder(orderModel);
         if (!sign) {
             logger.error("OrderDBSyncOpenSearchHandler 操作DB更新订单失败");

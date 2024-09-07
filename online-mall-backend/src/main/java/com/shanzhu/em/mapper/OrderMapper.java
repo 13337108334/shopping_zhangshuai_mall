@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shanzhu.em.entity.Order;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
@@ -26,4 +27,7 @@ public interface OrderMapper extends BaseMapper<Order> {
     boolean receiveOrder(String orderNo);
 
     Map<String, Object> selectByOrderNo(String orderNo);
+
+    @Select("select * from t_order where order_no = #{orderNo}")
+    Order selectByOrderNoPlus(String orderNo);
 }

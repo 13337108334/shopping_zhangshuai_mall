@@ -130,9 +130,6 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
      */
     @Transactional
     public void payOrder(String orderNo,String payType) {
-        //更改状态为代付款
-        orderMapper.payOrder(orderNo,payType);
-
         //给对应规格减库存
         Map<String, Object> orderMap = orderMapper.selectByOrderNo(orderNo);
         int count = (int) orderMap.get("count");
@@ -154,6 +151,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
 
         // 根据类型去匹配 并异步发送消息给宽表 同步数据
         payLogic.logic(PayTypeEnum.of(payType),order.getId());
+
     }
 
     /**
