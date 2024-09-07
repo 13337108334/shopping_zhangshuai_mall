@@ -51,7 +51,7 @@ public class WechatServiceImpl extends AbstractPayService {
             return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getErrorMessage());
         }
         //todo 微信订单支付对接-待开发
-        // 支付成功发送微信订单成功消息 同步到宽表
+        // 支付成功发送微信订单成功消息 DB同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_WECHAT, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
         return resultData;
     }
