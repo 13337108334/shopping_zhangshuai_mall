@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 public class MyBankEFTServiceImpl extends AbstractPayService {
     private static final Logger logger = LoggerFactory.getLogger(MyBankEFTServiceImpl.class);
 
-    public static final String ROUTING_KEY_ORDER_WECHAT = "order_mybankeftpay";
+    public static final String ROUTING_KEY_ORDER_MYBANKEFTPAY = "order_mybankeftpay";
 
     @Autowired
     private RabbitMqSenderService rabbitMqSenderService;
@@ -46,7 +46,7 @@ public class MyBankEFTServiceImpl extends AbstractPayService {
         }
         //todo 电票订单支付对接-待开发
         // 支付成功发送电票订单成功消息 同步到宽表
-        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_WECHAT, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
+        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_MYBANKEFTPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
         return resultData;
     }
 
