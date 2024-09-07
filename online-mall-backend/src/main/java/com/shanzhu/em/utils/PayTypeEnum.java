@@ -13,6 +13,8 @@ public enum PayTypeEnum {
     ALIPAY("alipay", "支付宝支付", 1L, "00000001"),
     WECHATPAY("wechatpay", "微信", 2L, "00000002"),
     OTHERPAY("otherpay", "其他支付方式", 3L, "00000003"),
+    TRANSBANK("transbankpay", "银行卡", 3L, "00000004"),
+    MYBANK_EFT("mybankeftpay", "电子承兑汇票票", 3L, "00000005"),
     ;
 
     private String value;

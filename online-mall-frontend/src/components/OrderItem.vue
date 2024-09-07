@@ -9,6 +9,11 @@
   <div class="header" style="padding-left: 25px;">
     <span style="line-height: 40px">{{order.create_time}}</span>
     <span style="line-height: 40px;margin-left: 30px">订单编号： {{order.order_no}}</span>
+    <span style="line-height: 40px;margin-left: 30px" v-if="order.pay_type=== 'alipay'" > 支付方式：支付宝 </span>
+    <span style="line-height: 40px;margin-left: 30px" v-if="order.pay_type=== 'wechatpay'" > 支付方式：微信 </span>
+    <span style="line-height: 40px;margin-left: 30px" v-if="order.pay_type=== 'otherpay'" > 支付方式：其他方式 </span>
+    <span style="line-height: 40px;margin-left: 30px" v-if="order.pay_type=== 'transbankpay'" > 支付方式：银行卡 </span>
+    <span style="line-height: 40px;margin-left: 30px" v-if="order.pay_type=== 'mybankeftpay'" > 支付方式：电子承兑汇票 </span>
   </div>
   <div class="body">
     <div style="display: inline-block;margin-right: 20px">
@@ -65,6 +70,7 @@
               <el-button style="margin-left: 20px" size="mini" type="success" @click="pay">去支付</el-button>
             </td>
           </template>
+
 
         </tr>
       </table>

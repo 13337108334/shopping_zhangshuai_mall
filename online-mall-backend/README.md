@@ -7,7 +7,7 @@ java 1.8
 异常类、BeanCopy类（包含一键拷贝集合）、多线程类、返回值、枚举类都封装好了 提供整套能力
 后续开发极度舒适！
 前端 vue+js+nodejs
-后端 jdk1.8+springBoot+maven+mybaties+mysql+rabbitMQ+redis+openSearch宽表
+后端 jdk1.8+springBoot+maven+mybatis+mysql+rabbitMQ+redis+openSearch宽表
 设计模式使用：工厂+模版+策略 详见此包 com/shanzhu/em/service/orderpay/impl/AliPayServiceImpl
 异步使用
     线程池ThreadPoolUtils  详见此包 com/shanzhu/em/utils
@@ -22,7 +22,7 @@ java 1.8
 4、mysql 5.7以上  root  123456 （默认密码root需要改为123456）
 5、jdk 1.8以上
 6、nodejs 16.13.2以上
-7、rabbitmq 
+7、rabbitMQ 3.13.7  Erlang 26.2.5
 
     mac配置rabbitmq安装文档： https://blog.csdn.net/marsjin/article/details/135938937
     rabbitmq集成springboot文档： https://blog.csdn.net/lvoelife/article/details/126622148
@@ -38,8 +38,22 @@ java 1.8
     查看rabbitmq状态
     sudo rabbitmqctl status
     
+    rabbitmq关机命令 
+    sudo rabbitmqctl stop
+
     访问rabbitmq页面
     http://localhost:15672
+    
+    启动trace日志
+
+        启动
+        rabbitmq-plugins enable rabbitmq_tracing
+        rabbitmqctl trace_on
+        rabbitmqctl trace_on -p test-host (queue的名)
+
+        关闭
+        rabbitmq-plugins disable rabbitmq_tracing
+
     
     默认账号guest 
     默认密码guest
@@ -89,3 +103,14 @@ git commit -m "提交备注"
 git push 提交
 
 有任何不懂的问题可以v 13337108334 有偿
+
+其他：
+    依赖报错/依赖没有的问题 
+        project-setting中检查项目、模块中的jdk版本
+        检查pom文件引入依赖的版本号
+        mvn clean install
+        检查settings.xml文件 配置阿里云镜像是不是标签写错了 空行是不是多了
+        将本地仓库里的文件全部删除 再重新mvn clean install
+        点击idea右手边的maven的m图标    输入命令 mvn -U idea:idea
+        还不行就只能去网上找依赖下载下来 再导入到idea的Project Structure - Library - 点加号 - java 选你下载下来的文件
+    
