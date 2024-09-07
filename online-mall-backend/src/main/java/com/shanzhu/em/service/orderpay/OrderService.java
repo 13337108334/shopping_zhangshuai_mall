@@ -149,7 +149,7 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
         //商品售出
         goodMapper.saleGood(goodId, count, order.getTotalPrice());
 
-        // 根据类型去匹配 并异步发送消息给宽表 同步数据
+        // 根据类型去匹配 更新订单支付类型 支付状态为已支付 并异步发送消息给宽表 同步数据
         payLogic.logic(PayTypeEnum.of(payType),order.getId());
 
     }
