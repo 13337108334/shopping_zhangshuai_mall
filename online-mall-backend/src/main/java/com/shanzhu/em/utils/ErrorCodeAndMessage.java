@@ -11,6 +11,11 @@ public enum ErrorCodeAndMessage {
      */
     ORDER_IS_NULL(10008, "未查询到该笔订单,请检查订单表是否存在该id对应的订单"),
 
+    /**
+     * 订单状态异常/已撤回 该笔订单不存在
+     */
+    ORDER_STATE_IS_NULL(10008, "订单状态异常/已撤回 该笔订单不存在"),
+
      /**
      * 更新订单失败
      */

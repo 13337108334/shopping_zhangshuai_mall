@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  * 银行卡支付
@@ -42,7 +43,14 @@ public class TransBankServiceImpl extends AbstractPayService {
         logger.info("TransBankServiceImpl payOrder payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
         ResultData<Order> resultData = getOrder(payTypeEnum, id);
         if(resultData == null || !resultData.isSuccess() || resultData.getData() == null) {
-            return resultData;
+            throw new BizException(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
+        }
+        if(StringUtils.isEmpty(resultData.getData().getState())) {
+            throw new BizException(ErrorCodeAndMessage.ORDER_STATE_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_STATE_IS_NULL.getErrorMessage());
+        }
+        if ("已支付".equals(resultData.getData().getState())) {
+            logger.error("TransBankServiceImpl getOrder order state 订单id为:{},status:{} desc:{}", JSON.toJSONString(id), JSON.toJSONString(resultData.getData().getState()),"该订单已支付 无需再次支付");
+            return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getErrorMessage());
         }
         //todo 银行订单支付对接-待开发
         // 支付成功发送银行订单成功消息 同步到宽表
