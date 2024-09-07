@@ -83,6 +83,7 @@ public class OrderDBSyncOpenSearchHandler {
             // 支付成功后根据类型去同步到宽表数据
             // 事务回滚测试
             // orderModel = null ;
+            // actionType = "dkjue";
             openSearchSynchronize(orderModel, actionType, messageCreateTime);
     }
 
