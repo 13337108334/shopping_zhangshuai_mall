@@ -31,7 +31,7 @@ public enum ErrorCodeAndMessage {
     /**
      * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum，如新增实现需要在该枚举类下新增类型 并在orderpay/impl包下新增实现)
      */
-    SOURCE_BIZTYPE_ENUMLIST_IS_NULL(10009, "来源类型为空"),
+    SOURCE_BIZTYPE_ENUMLIST_IS_NULL(10009, "来源类型为空,请参考PayTypeEnum类的值"),
 
     /**
      * list集合为空

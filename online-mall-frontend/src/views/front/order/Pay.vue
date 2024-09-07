@@ -23,19 +23,27 @@
     <span>支付方式：</span>
   </div>
   <br>
-  <img src="../../../resource/img/微信支付.png" style="width: 45px;height: 45px;margin-right: 60px;cursor:pointer;" @click="pay">
-  <img src="../../../resource/img/支付宝.png" style="width: 50px;height: 50px;cursor:pointer;" @click="pay">
+  <img src="../../../resource/img/微信支付.png" style="width: 45px;height: 45px;margin-right: 60px;cursor:pointer;" @click="wechatpay">
+  <img src="../../../resource/img/支付宝.png" style="width: 45px;height: 45px;margin-right: 60px;cursor:pointer;" @click="alipay">
+  <img src="../../../resource/img/人民币.png" style="width: 45px;height: 45px;margin-right: 60px;cursor:pointer;" @click="otherpay">
+  <img src="../../../resource/img/银行.png" style="width: 45px;height: 45px;margin-right: 60px;cursor:pointer;" @click="transbankpay">
+  <img src="../../../resource/img/电票.png" style="width: 45px;height: 45px;margin-right: 60px;cursor:pointer;" @click="mybankeftpay">
 </div>
 </template>
 
 <script>
 export default {
   name: "Pay",
-  data(){
-    return{
+  data() {
+    return {
       userId: 0,
       money1: 0,
       orderNo: '',
+      payType1: 'wechatpay',
+      payType2: 'alipay',
+      payType3: 'otherpay',
+      payType4: 'transbankpay',
+      payType5: 'mybankeftpay',
     }
   },
   created() {
@@ -43,20 +51,63 @@ export default {
     this.orderNo = this.$route.query.orderNo;
   },
 
-  methods:{
-    pay(){
-      this.request.get("/api/order/paid/"+this.orderNo).then(res=>{
-        if(res.code==='200'){
-          alert("您成功支付"+this.money+"元")
+  methods: {
+    wechatpay() {
+      this.request.get("/api/order/paid/" + this.orderNo + "/" + this.payType1).then(res => {
+        if (res.code === '200') {
+          alert("您成功支付" + this.money + "元")
           this.$router.replace("/orderlist")
-        }else{
+        } else {
           this.$message.error(res.msg)
         }
       })
+    },
 
+    alipay() {
+      this.request.get("/api/order/paid/" + this.orderNo + "/" + this.payType2).then(res => {
+        if (res.code === '200') {
+          alert("您成功支付" + this.money + "元")
+          this.$router.replace("/orderlist")
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+
+    otherpay() {
+      this.request.get("/api/order/paid/" + this.orderNo + "/" + this.payType3).then(res => {
+        if (res.code === '200') {
+          alert("您成功支付" + this.money + "元")
+          this.$router.replace("/orderlist")
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+
+    transbankpay() {
+      this.request.get("/api/order/paid/" + this.orderNo + "/" + this.payType4).then(res => {
+        if (res.code === '200') {
+          alert("您成功支付" + this.money + "元")
+          this.$router.replace("/orderlist")
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
+    },
+
+    mybankeftpay() {
+      this.request.get("/api/order/paid/" + this.orderNo + "/" + this.payType5).then(res => {
+        if (res.code === '200') {
+          alert("您成功支付" + this.money + "元")
+          this.$router.replace("/orderlist")
+        } else {
+          this.$message.error(res.msg)
+        }
+      })
     }
-  }
 
+  }
 }
 </script>
 

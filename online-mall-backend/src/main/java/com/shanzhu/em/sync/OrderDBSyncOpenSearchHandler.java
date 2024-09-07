@@ -49,7 +49,7 @@ public class OrderDBSyncOpenSearchHandler {
     @Transactional
     public void SyncOpenSearchReceiverMsgHandle(String msg) throws Exception {
         // 1、转换模型
-        logger.info("消息已成功接收 msg body:{}", JSON.toJSONString(msg));
+        logger.info("OrderDBSyncOpenSearchHandler 消息已成功接收 msg body:{}", JSON.toJSONString(msg));
         Map<String, Map<String, String>> map = new HashMap<>();
         ResultData sourceResultData = new ResultData();
         Map<String, String> sourceResultMap;
@@ -58,7 +58,7 @@ public class OrderDBSyncOpenSearchHandler {
             sourceResultMap = map.get("resultData");
             sourceResultData = JSON.parseObject(String.valueOf(sourceResultMap), ResultData.class);
         } catch (Exception e) {
-            logger.error("消息消费失败 JSON转换map异常, e:{}", e);
+            logger.error("OrderDBSyncOpenSearchHandler 消息消费失败 JSON转换map异常, e:{}", e);
             return;
         }
         ResultData<Order> targetResult = new ResultData<>();
@@ -67,7 +67,7 @@ public class OrderDBSyncOpenSearchHandler {
 
         // 2、校验数据
         if (targetResult == null || !targetResult.isSuccess() || targetResult.getData() == null) {
-            logger.error("消息消费失败 , targetResult is null");
+            logger.error("OrderDBSyncOpenSearchHandler 消息消费失败 , targetResult is null");
             return;
         }
 
@@ -76,10 +76,12 @@ public class OrderDBSyncOpenSearchHandler {
         String actionType = String.valueOf(map.get("actionType"));
         // 消息发送时间
         String messageCreateTime = String.valueOf(map.get("time"));
+        // 支付类型
+        String payType = String.valueOf(map.get("payType"));
 
-        logger.info("actionType:{}", JSON.toJSONString(actionType));
+        logger.info("OrderDBSyncOpenSearchHandler actionType:{}", JSON.toJSONString(actionType));
             // 支付成功后更新数据库字段
-            dbUpdate(orderModel);
+            dbUpdate(orderModel,payType);
             // 支付成功后根据类型去同步到宽表数据
             // 事务回滚测试
             // orderModel = null ;
@@ -88,13 +90,14 @@ public class OrderDBSyncOpenSearchHandler {
     }
 
 
-    public void dbUpdate(Order orderModel) {
+    public void dbUpdate(Order orderModel,String payType) {
+        orderModel.setPayType(payType);
         Boolean sign = orderService.updateOrder(orderModel);
         if (!sign) {
-            logger.error("操作DB更新订单失败");
+            logger.error("OrderDBSyncOpenSearchHandler 操作DB更新订单失败");
             throw new BizException(ErrorCodeAndMessage.UPDATE_ORDER_ERROR.getStringErrorCode(), ErrorCodeAndMessage.UPDATE_ORDER_ERROR.getErrorMessage());
         }
-        logger.info("操作DB更新订单成功");
+        logger.info("OrderDBSyncOpenSearchHandler 操作DB更新订单成功");
     }
 
 
@@ -109,21 +112,21 @@ public class OrderDBSyncOpenSearchHandler {
         switch (actionType) {
             case ActionTypeContent.INSERT:
                 // todo 调用宽表插入接口 插入前校验ID是否存在，存在则更新 不存在则创建-兼容
-                logger.info("openSearchSynchronize 调用宽表插入接口 actionType:{}", JSON.toJSONString(actionType));
-                logger.info("openSearchSynchronize INSERT 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
+                logger.info("OrderDBSyncOpenSearchHandler openSearchSynchronize 调用宽表插入接口 actionType:{}", JSON.toJSONString(actionType));
+                logger.info("OrderDBSyncOpenSearchHandler openSearchSynchronize INSERT 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
                 break;
             case ActionTypeContent.UPDATE:
                 // todo 调用宽表更新接口 插入前校验ID是否存在，存在则更新 不存在则创建-兼容
-                logger.info("openSearchSynchronize 调用宽表更新接口 actionType:{}", JSON.toJSONString(actionType));
-                logger.info("openSearchSynchronize UPDATE 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
+                logger.info("OrderDBSyncOpenSearchHandler openSearchSynchronize 调用宽表更新接口 actionType:{}", JSON.toJSONString(actionType));
+                logger.info("OrderDBSyncOpenSearchHandler openSearchSynchronize UPDATE 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
                 break;
             case ActionTypeContent.DELETE:
                 // todo 调用宽表删除接口 删除前校验ID是否存在,存在则删除，不存在则抛异常-不兼容
-                logger.info("openSearchSynchronize 调用宽表删除接口 actionType:{}", JSON.toJSONString(actionType));
-                logger.info("openSearchSynchronize DELETE 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
+                logger.info("OrderDBSyncOpenSearchHandler openSearchSynchronize 调用宽表删除接口 actionType:{}", JSON.toJSONString(actionType));
+                logger.info("OrderDBSyncOpenSearchHandler openSearchSynchronize DELETE 消息消费成功！ openSearchOrderParam：{}", JSON.toJSONString(openSearchOrderParam));
                 break;
             default:
-                logger.error("openSearchSynchronize 宽表类型 actionType字段 传入有误 抛出异常 ");
+                logger.error("OrderDBSyncOpenSearchHandler openSearchSynchronize 宽表类型 actionType字段 传入有误 抛出异常 ");
                 throw new BizException(ErrorCodeAndMessage.OPEN_SEARCH_ACTION_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.OPEN_SEARCH_ACTION_IS_NULL.getErrorMessage());
         }
     }

@@ -1,11 +1,14 @@
 package com.shanzhu.em.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.shanzhu.em.common.R;
 import com.shanzhu.em.constants.Status;
 import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.service.orderpay.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +23,8 @@ import java.util.Map;
 @RequestMapping("/api/order")
 @RequiredArgsConstructor
 public class OrderController {
+
+    private static final Logger log = LoggerFactory.getLogger(OrderController.class);
 
     private final OrderService orderService;
 
@@ -91,9 +96,10 @@ public class OrderController {
      * @param orderNo 订单编号
      * @return 支付结果
      */
-    @GetMapping("/paid/{orderNo}")
-    public R<Void> payOrder(@PathVariable String orderNo) {
-        orderService.payOrder(orderNo);
+    @GetMapping("/paid/{orderNo}/{payType}")
+    public R<Void> payOrder(@PathVariable String orderNo,@PathVariable String payType) {
+        log.info("OrderController payOrder orderNo:{},payType:{}", JSON.toJSONString(orderNo),JSON.toJSONString(payType));
+        orderService.payOrder(orderNo,payType);
         return R.success();
     }
 

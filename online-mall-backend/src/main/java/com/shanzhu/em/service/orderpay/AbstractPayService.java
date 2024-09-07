@@ -37,13 +37,10 @@ public abstract class AbstractPayService implements PayService {
                 logger.error("AbstractPayService getOrder order is null 订单id为:{},sourceBizTypeEnum:{}", JSON.toJSONString(id), JSON.toJSONString(payTypeEnum));
                 return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
             }
-            // todo: 上线前放开校验
-//            if ("已支付".equals(order.getState())) {
-//                logger.error("AbstractPayService getOrder order state 订单id为:{},status:{} desc:{}", JSON.toJSONString(id), JSON.toJSONString(order.getState()),"该订单已支付 无需再次支付");
-//                return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getErrorMessage());
-//            }
-            // 篡改来源类型在DB订单model的payType字段
-            order.setPayType(payTypeEnum.getValue());
+            if ("已支付".equals(order.getState())) {
+                logger.error("AbstractPayService getOrder order state 订单id为:{},status:{} desc:{}", JSON.toJSONString(id), JSON.toJSONString(order.getState()),"该订单已支付 无需再次支付");
+                return ResultData.genError(ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getErrorMessage());
+            }
             ResultData<Order> resultData = ResultData.genSuccess(order);
             logger.info("AbstractPayService getOrder sourceBizTypeEnum.value:{} result:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(resultData));
             return resultData;

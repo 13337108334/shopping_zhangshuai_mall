@@ -16,8 +16,8 @@ import java.util.Map;
 @Mapper
 public interface OrderMapper extends BaseMapper<Order> {
 
-    @Update("update t_order set state = '已支付' where order_no = #{orderNo}")
-    void payOrder(String orderNo);
+    @Update("update t_order set state = '已支付',pay_type = #{payType} where order_no = #{orderNo} ")
+    void payOrder(String orderNo,String payType);
 
     @MapKey("id")
     List<Map<String, Object>> selectByUserId(int userId);

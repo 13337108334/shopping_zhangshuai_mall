@@ -55,40 +55,20 @@ public class GoodController {
     }
 
     /**
-     * 注意！！！： 测试前将 该类定义的公用参数 ORDER_LONG_ID 第40行代码 改为你数据库 t_order表的id 再进行测试
-     * 访问地址：http://localhost:8888/api/good/logic/
-     * 测试支付宝、微信、其他，这三种支付方式走策略模式代码
+     * http://localhost:8888/api/good/logic/id/PayTypeEnum
+     * 例如： http://localhost:8888/api/good/logic/31/mybankeftpay
+     * 测试支付宝、微信、电子银行、电子承兑汇票、其他，这五种支付方式走策略模式代码
      *
      * @return 订单信息包被体
      */
-    @GetMapping("/logic/{id}")
-    public ResultData<Order> logicController(@PathVariable Long id) {
+    @GetMapping("/logic/{id}/{payType}")
+    public ResultData<Order> logicController(@PathVariable Long id,@PathVariable String payType) {
         log.info("TestController logicController -1 进入controller代码");
-        PayTypeEnum payTypeEnum1 = PayTypeEnum.of("alipay");
-        PayTypeEnum payTypeEnum2 = PayTypeEnum.of("wechatpay");
-        PayTypeEnum payTypeEnum3 = PayTypeEnum.of("otherpay");
-        PayTypeEnum payTypeEnum4 = PayTypeEnum.of("transbankpay");
-        PayTypeEnum payTypeEnum5 = PayTypeEnum.of("mybankeftpay");
-
-        List<PayTypeEnum> payTypeEnumList = new ArrayList<>();
-        payTypeEnumList.add(payTypeEnum1);
-        payTypeEnumList.add(payTypeEnum2);
-        payTypeEnumList.add(payTypeEnum3);
-        payTypeEnumList.add(payTypeEnum4);
-        payTypeEnumList.add(payTypeEnum5);
-        log.info("TestController logicController -2 sourceBizTypeEnumList:{}", JSON.toJSONString(payTypeEnumList));
-        if (CollectionUtils.isEmpty(payTypeEnumList)) {
-            ResultData<Order> resultData = ResultData.genError(ErrorCodeAndMessage.SOURCE_LIST_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.SOURCE_LIST_IS_NULL.getErrorMessage());
-            log.error("TestController logicController sourceBizTypeEnumList is null 程序返回结果为 result：{}",JSON.toJSONString(resultData));
-            return resultData;
-        }
-        // 打乱集合顺序 枚举随机从集合取第一个值作为一个随机来源类型向下传递
-        Collections.shuffle(payTypeEnumList);
-        PayTypeEnum payTypeEnum = payTypeEnumList.get(0);
-        log.info("TestController logicController sourceBizTypeEnum:{}", JSON.toJSONString(payTypeEnum));
+        PayTypeEnum payTypeEnum = PayTypeEnum.of(payType);
+        log.info("TestController logicController payTypeEnum:{}", JSON.toJSONString(payTypeEnum));
         if (payTypeEnum == null) {
             ResultData<Order> resultData = ResultData.genError(ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.SOURCE_BIZTYPE_ENUMLIST_IS_NULL.getErrorMessage());
-            log.error("TestController logicController sourceBizTypeEnum来源类型随机取到了null 程序返回结果为 result：{}",JSON.toJSONString(resultData));
+            log.error("TestController logicController PayTypeEnum来源类型不正确 请修改结果后重试 程序返回结果为 result：{}",JSON.toJSONString(resultData));
             return resultData;
         }
         log.info("TestController logicController -3 sourceBizTypeEnum:{},sourceBizTypeEnum.value:{}", JSON.toJSONString(payTypeEnum), JSON.toJSONString(payTypeEnum.getValue()));

@@ -15,17 +15,15 @@ import com.shanzhu.em.entity.Order;
 import com.shanzhu.em.entity.OrderGoods;
 import com.shanzhu.em.entity.OrderItem;
 import com.shanzhu.em.service.CartService;
-import com.shanzhu.em.utils.BizException;
+import com.shanzhu.em.utils.*;
 import com.shanzhu.em.mapper.GoodMapper;
 import com.shanzhu.em.mapper.OrderGoodsMapper;
 import com.shanzhu.em.mapper.OrderMapper;
 import com.shanzhu.em.mapper.StandardMapper;
-import com.shanzhu.em.utils.ErrorCodeAndMessage;
-import com.shanzhu.em.utils.ResultData;
-import com.shanzhu.em.utils.TokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +53,9 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
     private final GoodMapper goodMapper;
 
     private final CartService cartService;
+
+    @Autowired
+    private PayLogic payLogic;
 
     /**
      * 分页查询订单
@@ -128,9 +129,9 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
      * @param orderNo 订单编号
      */
     @Transactional
-    public void payOrder(String orderNo) {
+    public void payOrder(String orderNo,String payType) {
         //更改状态为代付款
-        orderMapper.payOrder(orderNo);
+        orderMapper.payOrder(orderNo,payType);
 
         //给对应规格减库存
         Map<String, Object> orderMap = orderMapper.selectByOrderNo(orderNo);
@@ -150,6 +151,9 @@ public class OrderService extends ServiceImpl<OrderMapper, Order> {
 
         //商品售出
         goodMapper.saleGood(goodId, count, order.getTotalPrice());
+
+        // 根据类型去匹配 并异步发送消息给宽表 同步数据
+        payLogic.logic(PayTypeEnum.of(payType),order.getId());
     }
 
     /**
