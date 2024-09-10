@@ -68,14 +68,14 @@ public abstract class AbstractPayService implements PayService {
 
     protected ResultData<Order> getOrderResultData(PayTypeEnum payTypeEnum, Long id) {
         if (payTypeEnum == null) {
-            logger.error("getOrderResultData payOrder payTypeEnum is null");
+            logger.error("AbstractPayService getOrderResultData payOrder payTypeEnum is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
         }
         if (id == null) {
-            logger.error("getOrderResultData payOrder id is null");
+            logger.error("AbstractPayService getOrderResultData payOrder id is null");
             throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_ID_NULL.getErrorMessage());
         }
-        logger.info("getOrderResultData payOrder payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
+        logger.info("AbstractPayService getOrderResultData payOrder payTypeEnum.value:{}, id:{}", JSON.toJSONString(payTypeEnum.getValue()), JSON.toJSONString(id));
         ResultData<Order> resultData = getOrder(payTypeEnum, id);
         if(resultData == null || !resultData.isSuccess() || resultData.getData() == null) {
             throw new BizException(ErrorCodeAndMessage.ORDER_IS_NULL.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_NULL.getErrorMessage());
@@ -85,7 +85,7 @@ public abstract class AbstractPayService implements PayService {
         }
         // 已支付 和 已确认收货的订单 无需重复支付
         if ("已支付".equals(resultData.getData().getState()) || "已收货".equals(resultData.getData().getState()) ) {
-            logger.error("getOrderResultData getOrder order state 订单id为:{},status:{} desc:{}", JSON.toJSONString(id), JSON.toJSONString(resultData.getData().getState()),"该订单已支付 无需再次支付");
+            logger.error("AbstractPayService getOrderResultData state 订单id为:{},status:{} desc:{}", JSON.toJSONString(id), JSON.toJSONString(resultData.getData().getState()),"该订单"+ JSON.toJSONString(resultData.getData().getState()) +"无需再次支付");
             throw new BizException(ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getStringErrorCode(), ErrorCodeAndMessage.ORDER_IS_ALREADY_PAY.getErrorMessage());
         }
         return resultData;
