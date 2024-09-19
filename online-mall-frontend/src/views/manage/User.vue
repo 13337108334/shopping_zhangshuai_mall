@@ -52,6 +52,9 @@
       <el-form-item label="地址">
         <el-input v-model="user.address" autocomplete="off"></el-input>
       </el-form-item>
+      <el-form-item label="密码">
+        <el-input v-model="user.passwordplus" autocomplete="off"></el-input>
+      </el-form-item>
 
     </el-form>
 
@@ -79,6 +82,7 @@
     <el-table-column prop="phone" label="电话" width="180" ></el-table-column>
     <el-table-column prop="email" label="邮箱" width="180" ></el-table-column>
     <el-table-column prop="address" label="地址" width="200" ></el-table-column>
+    <el-table-column prop="passwordplus" label="密码" width="80" ></el-table-column>
 
     <el-table-column label="操作">
       <template slot-scope="scope">
