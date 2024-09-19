@@ -23,6 +23,7 @@ import java.util.Map;
 
 /**
  * 3次重试/5s重试一次
+ *
  * @author zhangshuai
  * @datetime 2022/9/1 16:08
  * @desc 消息接收者
@@ -80,17 +81,17 @@ public class OrderDBSyncOpenSearchHandler {
         String payType = String.valueOf(map.get("payType"));
 
         logger.info("OrderDBSyncOpenSearchHandler actionType:{}", JSON.toJSONString(actionType));
-            // 支付成功后更新数据库字段
-            dbUpdate(orderModel,payType);
-            // 支付成功后根据类型去同步到宽表数据
-            // 事务回滚测试
-            // orderModel = null ;
-            // actionType = "dkjue";
-            openSearchSynchronize(orderModel, actionType, messageCreateTime);
+        // 支付成功后更新数据库字段
+        dbUpdate(orderModel, payType);
+        // 支付成功后根据类型去同步到宽表数据
+        // 事务回滚测试
+        // orderModel = null ;
+        // actionType = "dkjue";
+        openSearchSynchronize(orderModel, actionType, messageCreateTime);
     }
 
 
-    public void dbUpdate(Order orderModel,String payType) {
+    public void dbUpdate(Order orderModel, String payType) {
         orderModel.setPayType(payType);
         orderModel.setState("已支付");
         Boolean sign = orderService.updateOrder(orderModel);
