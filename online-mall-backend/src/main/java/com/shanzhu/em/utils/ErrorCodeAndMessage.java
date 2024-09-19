@@ -34,7 +34,7 @@ public enum ErrorCodeAndMessage {
     ORDER_IS_ALREADY_PAY(100017, "该订单已支付/已确认收货 无需重复支付"),
 
     /**
-     * 来源类型为空 (枚举表：com.shanzhu.em.utils.SourceBizTypeEnum，如新增实现需要在该枚举类下新增类型 并在orderpay/impl包下新增实现)
+     * 来源类型为空 (枚举表：com.shanzhu.em.utils.PayTypeEnum，如新增实现需要在该枚举类下新增类型 并在orderpay/impl包下新增实现)
      */
     SOURCE_BIZTYPE_ENUMLIST_IS_NULL(10009, "来源类型为空,请参考PayTypeEnum类的值"),
 

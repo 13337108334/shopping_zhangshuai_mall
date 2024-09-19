@@ -33,7 +33,7 @@ public class OtherPayServiceImpl extends AbstractPayService {
     @Override
     public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         logger.info("----------OtherPayServiceImpl payOrder ----------");
-        ResultData<Order> resultData = getOrderResultData(payTypeEnum, id);
+        ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 其他订单支付对接-待开发
         // 支付成功发送其他订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_OTHERPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));

@@ -33,7 +33,7 @@ public class TransBankServiceImpl extends AbstractPayService {
     @Override
     public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         logger.info("----------TransBankServiceImpl payOrder ----------");
-        ResultData<Order> resultData = getOrderResultData(payTypeEnum, id);
+        ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 银行订单支付对接-待开发
         // 支付成功发送银行订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_TRANSBANKPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));

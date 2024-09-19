@@ -33,7 +33,7 @@ public class MyBankEFTServiceImpl extends AbstractPayService {
     @Override
     public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         logger.info("----------MyBankEFTServiceImpl payOrder ----------");
-        ResultData<Order> resultData = getOrderResultData(payTypeEnum, id);
+        ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 电票订单支付对接-待开发
         // 支付成功发送电票订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_MYBANKEFTPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));

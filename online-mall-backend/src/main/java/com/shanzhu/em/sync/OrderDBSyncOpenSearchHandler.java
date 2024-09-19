@@ -47,7 +47,7 @@ public class OrderDBSyncOpenSearchHandler {
      */
     @RabbitListener(queues = RabbitFanoutExchangeConfig.QUEUE)
     @Transactional
-    public void SyncOpenSearchReceiverMsgHandle(String msg) throws Exception {
+    public void syncOpenSearchReceiverMsgHandle(String msg) throws Exception {
         // 1、转换模型
         logger.info("OrderDBSyncOpenSearchHandler 消息已成功接收 msg body:{}", JSON.toJSONString(msg));
         Map<String, Map<String, String>> map = new HashMap<>();

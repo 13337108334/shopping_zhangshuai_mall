@@ -31,7 +31,7 @@ public class WechatServiceImpl extends AbstractPayService {
     @Override
     public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         logger.info("----------WechatServiceImpl payOrder ----------");
-        ResultData<Order> resultData = getOrderResultData(payTypeEnum, id);
+        ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 微信订单支付对接-待开发
         // 支付成功发送微信订单成功消息 DB同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_WECHAT, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));

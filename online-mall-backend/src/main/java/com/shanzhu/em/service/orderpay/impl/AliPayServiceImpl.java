@@ -35,7 +35,7 @@ public class AliPayServiceImpl extends AbstractPayService {
     @Override
     public ResultData<Order> payOrder(PayTypeEnum payTypeEnum, Long id) {
         logger.info("----------AliPayServiceImpl payOrder ----------");
-        ResultData<Order> resultData = getOrderResultData(payTypeEnum, id);
+        ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 阿里订单支付对接-待开发
         // 支付成功发送阿里订单成功消息 同步到宽表
         rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_AlIPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
