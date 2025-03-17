@@ -71,7 +71,7 @@ yml: jdbc:mysql://localhost:3306/DB_OnlineMall?serverTimezone=GMT%2b8&useSSL=fal
 5、前端 根目录 Terminal打开
 输入 npm install
 如果依赖下载不下来 就去百度搜一下换最新的淘宝镜像
-最后执行npm run dev
+最后执行  npm run dev
 6、前后端启动之后 看超管的数据库密码，数据库里默认存的是前端md5加密过的密码，需要手动去数据库改密码，可以debug或日志把输入加密后的密码打印出来
 7、com.shanzhu.em.controller.UserController#login 这是登陆的controller  (这是入参日志 controller, param loginForm )
 service -> com.shanzhu.em.service.UserService#login 这是登陆的service
