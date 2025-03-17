@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public class R<T> {
 
+
     /**
      * 状态码
      */
