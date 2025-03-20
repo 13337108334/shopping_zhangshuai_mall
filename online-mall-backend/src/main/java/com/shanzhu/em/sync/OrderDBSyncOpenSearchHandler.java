@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,11 +57,12 @@ public class OrderDBSyncOpenSearchHandler {
         Map<String, String> sourceResultMap;
         try {
             map = JSON.parseObject(msg, Map.class);
+            logger.info("OrderDBSyncOpenSearchHandler 消息转换 map:{}", JSON.toJSONString(map));
             sourceResultMap = map.get("resultData");
             sourceResultData = JSON.parseObject(String.valueOf(sourceResultMap), ResultData.class);
         } catch (Exception e) {
             logger.error("OrderDBSyncOpenSearchHandler 消息消费失败 JSON转换map异常, e:{}", e);
-            return;
+            throw new BizException(ErrorCodeAndMessage.SYSTEM_UNKNOW_ERROR.getStringErrorCode(), ErrorCodeAndMessage.SYSTEM_UNKNOW_ERROR.getErrorMessage());
         }
         ResultData<Order> targetResult = new ResultData<>();
         convertResult(sourceResultData, targetResult);
@@ -69,7 +71,7 @@ public class OrderDBSyncOpenSearchHandler {
         // 2、校验数据
         if (targetResult == null || !targetResult.isSuccess() || targetResult.getData() == null) {
             logger.error("OrderDBSyncOpenSearchHandler 消息消费失败 , targetResult is null");
-            return;
+            throw new BizException(ErrorCodeAndMessage.REMOTE_RESULT_NULL.getStringErrorCode(), ErrorCodeAndMessage.REMOTE_RESULT_NULL.getErrorMessage());
         }
 
         // 3、更新DB 并同步openSearch宽表
@@ -79,6 +81,11 @@ public class OrderDBSyncOpenSearchHandler {
         String messageCreateTime = String.valueOf(map.get("time"));
         // 支付类型
         String payType = String.valueOf(map.get("payType"));
+        // 消息routingKey
+        String routingKey = String.valueOf(map.get("routingKey"));
+        if(StringUtils.isEmpty(routingKey) || !routingKey.contains("order") ) {
+            throw new BizException(ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getStringErrorCode(), ErrorCodeAndMessage.MMP_CHECK_INPUT_NULL.getErrorMessage());
+        }
 
         logger.info("OrderDBSyncOpenSearchHandler actionType:{}", JSON.toJSONString(actionType));
         // 支付成功后更新数据库字段
@@ -93,6 +100,10 @@ public class OrderDBSyncOpenSearchHandler {
 
     public void dbUpdate(Order orderModel, String payType) {
         orderModel.setPayType(payType);
+        if(StringUtils.isEmpty(payType)){
+            logger.error("OrderDBSyncOpenSearchHandler payType is null 支付类型为空 不可支付");
+            throw new BizException(ErrorCodeAndMessage.PAY_TYPE_ERROR.getStringErrorCode(), ErrorCodeAndMessage.PAY_TYPE_ERROR.getErrorMessage());
+        }
         orderModel.setState("已支付");
         Boolean sign = orderService.updateOrder(orderModel);
         if (!sign) {

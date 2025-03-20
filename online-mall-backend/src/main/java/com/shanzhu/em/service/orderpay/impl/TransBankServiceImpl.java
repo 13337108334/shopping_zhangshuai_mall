@@ -25,7 +25,7 @@ import org.springframework.util.StringUtils;
 public class TransBankServiceImpl extends AbstractPayService {
     private static final Logger logger = LoggerFactory.getLogger(TransBankServiceImpl.class);
 
-    public static final String ROUTING_KEY_ORDER_TRANSBANKPAY = "order_transbankpay";
+    public static final String ROUTING_KEY = "order_transbankpay";
 
     @Autowired
     private RabbitMqSenderService rabbitMqSenderService;
@@ -36,7 +36,7 @@ public class TransBankServiceImpl extends AbstractPayService {
         ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 银行订单支付对接-待开发
         // 支付成功发送银行订单成功消息 同步到宽表
-        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_TRANSBANKPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
+        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY, new Message(getJsonObject(payTypeEnum, resultData,ROUTING_KEY).toJSONString().getBytes()));
         return resultData;
     }
 

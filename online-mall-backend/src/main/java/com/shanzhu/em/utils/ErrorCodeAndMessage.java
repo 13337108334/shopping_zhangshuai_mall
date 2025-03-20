@@ -21,6 +21,11 @@ public enum ErrorCodeAndMessage {
      */
      UPDATE_ORDER_ERROR(10071, "操作DB更新订单失败"),
 
+    /**
+     * 更新订单失败
+     */
+    PAY_TYPE_ERROR(10080, "支付类型为空 不可支付"),
+
 
     /**
      * 不存在的宽表操作类型 ActionTypeContent

@@ -54,7 +54,7 @@ public abstract class AbstractPayService implements PayService {
      * @param resultData        订单数据
      * @return  消息内容
      */
-    protected JSONObject getJsonObject(PayTypeEnum payTypeEnum, ResultData<Order> resultData) {
+    protected JSONObject getJsonObject(PayTypeEnum payTypeEnum, ResultData<Order> resultData,String routingKey) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", resultData.getData().getId());
         jsonObject.put("payType", payTypeEnum.getValue());
@@ -63,6 +63,7 @@ public abstract class AbstractPayService implements PayService {
         jsonObject.put("time", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:ms").format(new Date()));
         // 同步宽表行动点-插入
         jsonObject.put("actionType", ActionTypeContent.INSERT);
+        jsonObject.put("routingKey", routingKey);
         return jsonObject;
     }
 

@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
 public class WechatServiceImpl extends AbstractPayService {
     private static final Logger logger = LoggerFactory.getLogger(WechatServiceImpl.class);
 
-    public static final String ROUTING_KEY_ORDER_WECHAT = "order_wechatpay";
+    public static final String ROUTING_KEY = "order_wechatpay";
 
     @Autowired
     private RabbitMqSenderService rabbitMqSenderService;
@@ -34,7 +34,7 @@ public class WechatServiceImpl extends AbstractPayService {
         ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 微信订单支付对接-待开发
         // 支付成功发送微信订单成功消息 DB同步到宽表
-        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_WECHAT, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
+        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY, new Message(getJsonObject(payTypeEnum, resultData,ROUTING_KEY).toJSONString().getBytes()));
         return resultData;
     }
 

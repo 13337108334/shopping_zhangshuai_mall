@@ -25,7 +25,7 @@ public class OtherPayServiceImpl extends AbstractPayService {
 
     private static final Logger logger = LoggerFactory.getLogger(OtherPayServiceImpl.class);
 
-    public static final String ROUTING_KEY_ORDER_OTHERPAY = "order_otherpay";
+    public static final String ROUTING_KEY = "order_otherpay";
 
     @Autowired
     private RabbitMqSenderService rabbitMqSenderService;
@@ -36,7 +36,7 @@ public class OtherPayServiceImpl extends AbstractPayService {
         ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 其他订单支付对接-待开发
         // 支付成功发送其他订单成功消息 同步到宽表
-        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_OTHERPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
+        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY, new Message(getJsonObject(payTypeEnum, resultData,ROUTING_KEY).toJSONString().getBytes()));
         return resultData;
     }
 

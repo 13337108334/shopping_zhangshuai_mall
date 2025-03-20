@@ -23,7 +23,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class AliPayServiceImpl extends AbstractPayService {
 
-    public static final String ROUTING_KEY_ORDER_AlIPAY = "order_aliPay";
+    public static final String ROUTING_KEY = "order_aliPay";
 
     @Autowired
     private RabbitMqSenderService rabbitMqSenderService;
@@ -38,7 +38,7 @@ public class AliPayServiceImpl extends AbstractPayService {
         ResultData<Order> resultData = checkAndGetOrderResultData(payTypeEnum, id);
         //todo 阿里订单支付对接-待开发
         // 支付成功发送阿里订单成功消息 同步到宽表
-        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY_ORDER_AlIPAY, new Message(getJsonObject(payTypeEnum, resultData).toJSONString().getBytes()));
+        rabbitMqSenderService.send(RabbitFanoutExchangeConfig.EXCHANGE, ROUTING_KEY, new Message(getJsonObject(payTypeEnum, resultData,ROUTING_KEY).toJSONString().getBytes()));
         return resultData;
     }
 
